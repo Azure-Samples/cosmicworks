@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>cosmicworks</AssemblyName>
+    <RootNamespace>CosmicWorks.Tool</RootNamespace>
+    <TargetFramework>net7.0</TargetFramework>
+    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>cosmicworks</ToolCommandName>
+    <PackageOutputPath>./pkg</PackageOutputPath>
+    <PackageId>CosmicWorks</PackageId>
+    <Authors>Sidney Andrews</Authors>
+    <Company>Microsoft</Company>
+    <PackageTags>Azure;Cosmos DB;Cosmos;NoSQL;DocumentDb;Tool</PackageTags>
+    <Description>
+      Command-line tool to generate Azure Cosmos DB for NoSQL data.
+    </Description>
+    <ProjectUrl>https://github.com/azure-samples/cosmicworks</ProjectUrl>
+    <RepositoryUrl>https://github.com/azure-samples/cosmicworks</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="34.0.2" />
+    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.34.0" />
+    <PackageReference Include="Spectre.Console" Version="0.47.0" />
+    <PackageReference Include="Spectre.Console.Cli" Version="0.47.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\*.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>  
+  </ItemGroup>
+</Project>

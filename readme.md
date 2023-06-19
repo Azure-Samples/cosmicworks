@@ -8,8 +8,6 @@
 dotnet tool install cosmicworks --global
 ```
 
-## ~~Node.js~~ (coming soon)
-
-```bash
-npm install --global cosmicworks
+```powershell
+cosmicworks --emulator --number-of-items 500
 ```

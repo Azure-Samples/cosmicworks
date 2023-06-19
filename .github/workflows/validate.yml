@@ -1,0 +1,19 @@
+name: Validate .NET code samples
+on: push
+jobs:
+  validate-dotnet:
+    name: Validate .NET project
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/dotnet/sdk:6.0
+    defaults:
+      run:
+        working-directory: ./src/dotnet
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3        
+      - name: Check .NET version
+        run: dotnet --version       
+      - name: Build .NET project
+        run: dotnet build
+      - name: Check .NET code format
+        run: dotnet format --verify-no-changes

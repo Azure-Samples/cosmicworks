@@ -1,6 +1,6 @@
 namespace CosmicWorks.Tool.Interfaces;
 
-public interface IGeneratorService
+public interface IGeneratorService<T> where T : class
 {
-    void Generate();
+    Task<IReadOnlyCollection<T>> GenerateDataAsync(int count);
 }

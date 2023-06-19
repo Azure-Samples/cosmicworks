@@ -14,6 +14,6 @@ jobs:
       - name: Check .NET version
         run: dotnet --version       
       - name: Build .NET project
-        run: dotnet build
+        run: dotnet build .\cosmicworks.sln
       - name: Check .NET code format
-        run: dotnet format --verify-no-changes
+        run: dotnet format .\cosmicworks.sln --verify-no-changes

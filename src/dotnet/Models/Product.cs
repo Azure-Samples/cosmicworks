@@ -2,6 +2,10 @@ namespace CosmicWorks.Tool.Models;
 
 public record Product(
     string Id,
+    string TenantId,
+    string TenantName,
+    string VendorId,
+    string VendorName,
     string CategoryId,
     string CategoryName,
     string SKU,

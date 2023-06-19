@@ -1,6 +1,6 @@
 namespace CosmicWorks.Tool.Models;
 
 public record Tag(
-    string id,
-    string name
+    string Id,
+    string Name
 );

@@ -28,4 +28,4 @@ jobs:
         run: dotnet pack cosmicworks.tool.csproj --output out/ --include-symbols /p:VersionPrefix="${{ inputs.versionPrefix }}" /p:VersionSuffix="${{ inputs.versionSuffix }}"
       - name: Push NuGet package
         working-directory: ./src/dotnet/out
-        run: dotnet nuget push "**/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push "**/*.nupkg" --source https://api.nuget.org/v3/index.json

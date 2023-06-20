@@ -12,5 +12,18 @@ registrations.AddSingleton<IGeneratorService<Product>, BogusProductGeneratorServ
 
 var registrar = new ServiceCollectionRegistrar(registrations);
 
-return await new CommandApp<GenerateDataCommand>(registrar)
-    .RunAsync(args);
+CommandApp app = new(registrar);
+
+app.SetDefaultCommand<GenerateDataCommand>()
+    .WithDescription("Generate fictitious data for Azure Cosmos DB for NoSQL.");
+
+app.Configure(config =>
+{
+    config.SetApplicationName("cosmicworks");
+    config.AddExample(new[] { "--emulator" });
+    config.AddExample(new[] { "--emulator", "--number-of-items", "100" });
+    config.AddExample(new[] { "--connection-string", "<API-NOSQL-CONNECTION-STRING>" });
+    config.AddExample(new[] { "--connection-string", "<API-NOSQL-CONNECTION-STRING>", "--number-of-items", "500" });
+});
+
+return await app.RunAsync(args);

@@ -32,4 +32,7 @@
     <PackageReference Include="Spectre.Console.Cli" Version="0.47.0" />
     <PackageReference Include="Spectre.Console.Registrars.Microsoft-Di" Version="0.2.0" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="docs\readme.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 </Project>

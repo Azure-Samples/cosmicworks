@@ -1,0 +1,31 @@
+name: Publish to NuGet
+on: 
+  workflow_dispatch:
+    inputs:
+      versionPrefix:
+        description: 'Version prefix for the NuGet package'
+        required: true
+        default: '2.0.0'
+      versionSuffix:
+        description: 'Version suffix for the NuGet package'
+        required: false
+jobs:
+  push-to-nuget:
+    name: Push to NuGet
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/dotnet/sdk:7.0
+    defaults:
+      run:
+        working-directory: ./src/dotnet
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Package NuGet stable tool
+        if: ${{ inputs.versionSuffix == '' }}
+        run: dotnet pack cosmicworks.tool.csproj --output out/ --include-symbols /p:VersionPrefix="${{ inputs.versionPrefix }}"
+      - name: Package NuGet preview tool
+        if: ${{ inputs.versionSuffix != '' }}
+        run: dotnet pack cosmicworks.tool.csproj --output out/ --include-symbols /p:VersionPrefix="${{ inputs.versionPrefix }}" /p:VersionSuffix="${{ inputs.versionSuffix }}"
+      - name: Push NuGet package
+        working-directory: ./src/dotnet/out
+        run: dotnet nuget push "**/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}

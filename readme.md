@@ -15,9 +15,7 @@ dotnet tool install cosmicworks --global --prerelease
 ## Use
 
 ```powershell
-cosmicworks --emulator --number-of-items 500
+cosmicworks --emulator
 
-cosmicworks --connection-string <CONNECTION_STRING> --number-of-items 2000
+cosmicworks --connection-string <CONNECTION_STRING>
 ```
-
-> *More info is coming soon!*

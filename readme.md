@@ -1,15 +1,23 @@
-# `CosmicWorks` command-line tool
+# `CosmicWorks` command-line tool for .NET
 
 > *We are rebuilding cosmicworks as an open-source tool! Watch this repo and follow along as we work to v2 of this tool.*
 
-## .NET
+## NuGet link
+
+<https://www.nuget.org/packages/cosmicworks>
+
+## Install
 
 ```powershell
 dotnet tool install cosmicworks --global --prerelease
 ```
 
-[![Graphical button with text "more info".](https://placehold.co/140x34/091F2C/8DC8E8?font=source-sans-pro&text=More+info)](src/dotnet/readme.md)
+## Use
 
-## Node.js
+```powershell
+cosmicworks --emulator --number-of-items 500
 
-> *Planned for the future...*
+cosmicworks --connection-string <CONNECTION_STRING> --number-of-items 2000
+```
+
+> *More info is coming soon!*

@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+    <RootNamespace>CosmicWorks.Generator</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageOutputPath>./pkg</PackageOutputPath>
+    <PackageId>CosmicWorks</PackageId>
+    <Authors>Sidney Andrews</Authors>
+    <Company>Microsoft</Company>
+    <PackageTags>Azure;Cosmos DB;Cosmos;NoSQL;DocumentDb;Tool;CLI;CosmosDB</PackageTags>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <Description>
+      Command-line tool to generate Azure Cosmos DB for NoSQL data.
+    </Description>
+    <ProjectUrl>https://github.com/azure-samples/cosmicworks</ProjectUrl>
+    <RepositoryUrl>https://github.com/azure-samples/cosmicworks</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CosmicWorks.Data\CosmicWorks.Data.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="readme.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+</Project>

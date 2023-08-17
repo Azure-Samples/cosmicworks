@@ -22,4 +22,7 @@
   <ItemGroup>
     <None Include="readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="34.*" />
+  </ItemGroup>
 </Project>

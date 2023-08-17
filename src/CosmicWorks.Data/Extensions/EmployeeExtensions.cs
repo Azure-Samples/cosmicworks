@@ -1,6 +1,5 @@
 using Bogus;
 using CosmicWorks.Data.Models;
-using Raw = CosmicWorks.Data.Models.Raw;
 
 namespace CosmicWorks.Data.Extensions;
 

@@ -12,4 +12,6 @@ public sealed record Employee(
 )
 {
     public string Id { get; init; } = $"{Guid.NewGuid()}";
+
+    public override string ToString() => $"{Id} | {Name.First} {Name.Last}";
 }

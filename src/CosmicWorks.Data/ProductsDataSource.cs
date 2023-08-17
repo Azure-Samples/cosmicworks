@@ -1,7 +1,5 @@
-using System.Text.Json;
 using CosmicWorks.Data.Extensions;
 using CosmicWorks.Data.Models;
-using Raw = CosmicWorks.Data.Models.Raw;
 
 namespace CosmicWorks.Data;
 
@@ -16,13 +14,11 @@ public sealed class ProductsDataSource : IDataSource<Product>
             _ => count
         };
 
-        using FileStream reader = File.OpenRead(Path.Combine("Source", @"things.json"));
-        var results = await JsonSerializer.DeserializeAsync<IReadOnlyList<Raw.Thing>>(reader, new JsonSerializerOptions()
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        });
+        await Task.Delay(TimeSpan.FromSeconds(1));
 
-        IEnumerable<Product> products = (results ?? Enumerable.Empty<Raw.Thing>()).OrderBy(i => Guid.NewGuid()).ToProducts();
+        IEnumerable<Product> products = Raw.Things.Get()
+            .OrderBy(i => Guid.NewGuid())
+            .ToProducts();
 
         return products.Take(count).ToList();
     }

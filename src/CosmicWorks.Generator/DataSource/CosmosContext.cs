@@ -1,20 +1,14 @@
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Fluent;
+using Console = Spectre.Console.AnsiConsole;
 
-namespace CosmicWorks.Generator;
+namespace CosmicWorks.Generator.DataSource;
 
-internal sealed class CosmosContext : ICosmosContext
+public sealed class CosmosContext : ICosmosContext
 {
-    private readonly string _connectionString;
-
-    public CosmosContext(string connectionString)
+    public async Task SeedDataAsync<T>(string connectionString, string databaseName, string containerName, IEnumerable<T> items, params string[] partitionKeyPaths)
     {
-        _connectionString = connectionString;
-    }
-
-    public async Task SeedDataAsync<T>(string databaseName, string containerName, IEnumerable<T> items, params string[] partitionKeyPaths)
-    {
-        using CosmosClient client = new CosmosClientBuilder(_connectionString)
+        using CosmosClient client = new CosmosClientBuilder(connectionString)
             .WithSerializerOptions(new CosmosSerializationOptions()
             {
                 PropertyNamingPolicy = CosmosPropertyNamingPolicy.CamelCase,
@@ -30,7 +24,7 @@ internal sealed class CosmosContext : ICosmosContext
         Container container = await database.CreateContainerIfNotExistsAsync(
             new ContainerProperties(
                 id: containerName,
-                partitionKeyPaths: partitionKeyPaths.ToList<string>()
+                partitionKeyPaths: partitionKeyPaths.ToList()
             )
         );
 
@@ -45,7 +39,7 @@ internal sealed class CosmosContext : ICosmosContext
                         {
                             if (r.IsCompletedSuccessfully)
                             {
-                                Console.WriteLine($"[NEW {nameof(T).ToUpperInvariant()}]\t{r.Result.Resource}");
+                                Console.MarkupLine($"[green][bold][[NEW]][/]\t{r.Result.Resource}[/]");
                             }
                         }
                     )

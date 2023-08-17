@@ -10,4 +10,6 @@ public sealed record Product(
 )
 {
     public string Id { get; init; } = $"{Guid.NewGuid()}";
+
+    public override string ToString() => $"{Id} | {Name} - {Category.Name}";
 }

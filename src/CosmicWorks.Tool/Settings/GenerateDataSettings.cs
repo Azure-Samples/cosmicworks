@@ -1,6 +1,6 @@
-using System.ComponentModel;
 using Spectre.Console;
 using Spectre.Console.Cli;
+using System.ComponentModel;
 
 namespace CosmicWorks.Tool.Settings;
 
@@ -26,9 +26,9 @@ public sealed class GenerateDataSettings : CommandSettings
     {
         return (NumberOfProducts, NumberOfEmployees) switch
         {
-            (> 1500, _) => ValidationResult.Error("You can't generate more than 1500 products."),
+            ( > 1500, _) => ValidationResult.Error("You can't generate more than 1500 products."),
             (_, > 200) => ValidationResult.Error("You can't generate more than 200 employees."),
-            (<= 0, <= 0) => ValidationResult.Error("You must generate at least one product or employee."),
+            ( <= 0, <= 0) => ValidationResult.Error("You must generate at least one product or employee."),
             _ => ValidationResult.Success(),
         };
     }

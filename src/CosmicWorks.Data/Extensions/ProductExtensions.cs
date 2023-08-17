@@ -1,6 +1,5 @@
 using Bogus;
 using CosmicWorks.Data.Models;
-using Raw = CosmicWorks.Data.Models.Raw;
 
 namespace CosmicWorks.Data.Extensions;
 
@@ -24,7 +23,7 @@ internal static class ProductExtensions
 
     public static IEnumerable<string> GetTags(this Raw.Thing thing)
     {
-        foreach (var value in new List<string> { thing.CategoryName, thing.SubCategoryName, thing.Color, thing.Size })
+        foreach (var value in new List<string> { thing.CategoryName, thing.SubCategoryName, thing.Color!, thing.Size! })
         {
             if (value is not null)
             {

@@ -1,14 +1,14 @@
 ﻿using CosmicWorks.Tool.Commands;
-using CosmicWorks.Tool.Interfaces;
-using CosmicWorks.Tool.Services;
-using Spectre.Console.Cli;
-using Spectre.Console;
-using Microsoft.Extensions.DependencyInjection;
-using CosmicWorks.Tool.Models;
 
 var registrations = new ServiceCollection();
 
-registrations.AddSingleton<IGeneratorService<Product>, BogusProductGeneratorService>();
+registrations.AddSingleton<ILoggerFactory, LoggerFactory>();
+registrations.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
+registrations.AddSingleton<ICosmosContext, CosmosContext>();
+registrations.AddSingleton<IDataSource<Product>, ProductDataSource>();
+registrations.AddSingleton<IDataSource<Employee>, EmployeeDataSource>();
+registrations.AddSingleton<ICosmosDataGenerator<Product>, ProductsCosmosDataGenerator>();
+registrations.AddSingleton<ICosmosDataGenerator<Employee>, EmployeesCosmosDataGenerator>();
 
 var registrar = new ServiceCollectionRegistrar(registrations);
 

@@ -7,7 +7,7 @@ namespace CosmicWorks.Data;
 
 public sealed class EmployeesDataSource : IDataSource<Employee>
 {
-    public async Task<IReadOnlyList<Employee>> GenerateAsync(int count = 200)
+    public async Task<IReadOnlyList<Employee>> GetItemsAsync(int count = 200)
     {
         int generatedEmployeesCount = count switch
         {

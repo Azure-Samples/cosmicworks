@@ -7,15 +7,15 @@
     <Nullable>enable</Nullable>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageOutputPath>./pkg</PackageOutputPath>
-    <PackageId>CosmicWorks</PackageId>
+    <PackageId>CosmicWorks.Data</PackageId>
     <Authors>Sidney Andrews</Authors>
     <Company>Microsoft</Company>
-    <PackageTags>Azure;Cosmos DB;Cosmos;NoSQL;DocumentDb;Tool;CLI;CosmosDB</PackageTags>
+    <PackageTags>Azure;Cosmos DB;Cosmos;NoSQL;DocumentDb;CosmosDB</PackageTags>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <Description>
-      Command-line tool to generate Azure Cosmos DB for NoSQL data.
+      Library that generates fictiuous data with multiple schemas.
     </Description>
-    <ProjectUrl>https://github.com/azure-samples/cosmicworks</ProjectUrl>
+    <ProjectUrl>https://github.com/azure-samples/cosmicworks/tree/main/src/CosmicWorks.Data/readme.md</ProjectUrl>
     <RepositoryUrl>https://github.com/azure-samples/cosmicworks</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>

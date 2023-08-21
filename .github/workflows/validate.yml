@@ -12,7 +12,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3        
       - name: Check .NET version
-        run: dotnet --version       
+        run: dotnet --version
+      - name: Print recursive path
+        run: find .
       - name: Build .NET project
         run: dotnet build
       - name: Check .NET code format

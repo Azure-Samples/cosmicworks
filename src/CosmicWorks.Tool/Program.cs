@@ -22,15 +22,20 @@ var registrar = new ServiceCollectionRegistrar(registrations);
 CommandApp app = new(registrar);
 
 app.SetDefaultCommand<GenerateDataCommand>()
-    .WithDescription("Generate fictitious data for Azure Cosmos DB for NoSQL.");
+    .WithDescription("Generate and seed fictitious data in an Azure Cosmos DB for NoSQL account.");
 
 app.Configure(config =>
 {
     config.SetApplicationName("cosmicworks");
+    config.AddExample(new[] { "--help" });
+    config.AddExample(new[] { "--version" });
     config.AddExample(new[] { "--emulator" });
-    config.AddExample(new[] { "--emulator", "--number-of-items", "100" });
-    config.AddExample(new[] { "--connection-string", "<API-NOSQL-CONNECTION-STRING>" });
-    config.AddExample(new[] { "--connection-string", "<API-NOSQL-CONNECTION-STRING>", "--number-of-items", "500" });
+    config.AddExample(new[] { "--emulator", "--number-of-employees", "0" });
+    config.AddExample(new[] { "--emulator", "--number-of-products", "0" });
+    config.AddExample(new[] { "--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\"" });
+    config.AddExample(new[] { "--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\"", "--number-of-employees", "100" });
+    config.AddExample(new[] { "--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\"", "--number-of-products", "500" });
+    config.AddExample(new[] { "--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\"", "--number-of-employees", "200", "--number-of-products", "1000" });
 });
 
 return await app.RunAsync(args);

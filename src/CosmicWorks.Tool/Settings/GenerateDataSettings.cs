@@ -22,6 +22,10 @@ public sealed class GenerateDataSettings : CommandSettings
     [CommandOption("--number-of-employees <NUMBER_OF_EMPLOYEES>")]
     public int NumberOfEmployees { get; init; } = 200;
 
+    [Description("Gets the version of the tool.")]
+    [CommandOption("-v|--version <VERSION>")]
+    public bool RenderVersion { get; init; } = false;
+
     public override ValidationResult Validate()
     {
         return (NumberOfProducts, NumberOfEmployees) switch

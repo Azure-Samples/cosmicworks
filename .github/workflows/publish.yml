@@ -39,4 +39,5 @@ jobs:
         if: ${{ inputs.versionSuffix != '' }}
         run: dotnet pack CosmicWorks.Tool/CosmicWorks.Tool.csproj --output out/ --include-symbols /p:VersionPrefix="${{ inputs.versionPrefix }}" /p:VersionSuffix="${{ inputs.versionSuffix }}"
       - name: Push NuGet packages
+        working-directory: ./src/out
         run: dotnet nuget push "**/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate

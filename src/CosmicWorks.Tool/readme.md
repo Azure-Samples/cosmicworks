@@ -15,9 +15,13 @@ dotnet tool install cosmicworks --global --prerelease
 ## Examples
 
 ```powershell
+cosmicworks --version
+
+cosmicworks --help
+
 cosmicworks --emulator
 
-cosmicworks --connection-string "<CONNECTION_STRING>"
+cosmicworks --connection-string "<API_FOR_NOSQL_CONNECTION_STRING>"
 ```
 
 ## Arguments
@@ -28,6 +32,8 @@ cosmicworks --connection-string "<CONNECTION_STRING>"
 | **``--emulator`` (``-e``)** | Use emulators connection string | *This setting has a higher precedent than ``--connection-string``. |
 | **``--number-of-products``** | Number of product items to generate | *This setting defaults to ``200``. If set to ``0``, the corresponding container will be skipped. You must set at least this setting or ``--number-of-employees`` to a positive integer value. |
 | **``--number-of-employees``** | Number of product items to generate | *This setting defaults to ``1000``. If set to ``0``, the corresponding container will be skipped. You must set at least this setting or ``--number-of-products`` to a positive integer value. |
+| **``--help`` (``-h``)** | Renders help information and examples. |
+| **``--version`` (``-v``)** | Renders version information. |
 
 ## Related
 

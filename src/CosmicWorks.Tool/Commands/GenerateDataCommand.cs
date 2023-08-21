@@ -4,6 +4,7 @@ using CosmicWorks.Tool.Settings;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using Console = Spectre.Console.AnsiConsole;
 
 namespace CosmicWorks.Tool.Commands;
@@ -21,6 +22,13 @@ public sealed class GenerateDataCommand : AsyncCommand<GenerateDataSettings>
 
     public override async Task<int> ExecuteAsync([NotNull] CommandContext context, [NotNull] GenerateDataSettings settings)
     {
+        if (settings.RenderVersion)
+        {
+            string? version = Assembly.GetExecutingAssembly()?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+            Console.MarkupLine($"[teal][bold][[VERSION]][/]\t{version}[/]");
+            return 0;
+        }
+
         Console.WriteLine(); Console.Write(new Rule("[yellow]Parsing connection string[/]").LeftJustified().RuleStyle("olive")); Console.WriteLine();
 
         string connectionString = RetrieveConnectionString(settings.ConnectionString, settings.Emulator);

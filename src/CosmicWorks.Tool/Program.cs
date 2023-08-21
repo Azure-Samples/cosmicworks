@@ -27,10 +27,11 @@ app.SetDefaultCommand<GenerateDataCommand>()
 app.Configure(config =>
 {
     config.SetApplicationName("cosmicworks");
+    config.AddExample(new[] { "--help" });
+    config.AddExample(new[] { "--version" });
     config.AddExample(new[] { "--emulator" });
-    config.AddExample(new[] { "--emulator", "--number-of-employees", "50" });
-    config.AddExample(new[] { "--emulator", "--number-of-products", "250" });
-    config.AddExample(new[] { "--emulator", "--number-of-employees", "150", "--number-of-products", "750" });
+    config.AddExample(new[] { "--emulator", "--number-of-employees", "0" });
+    config.AddExample(new[] { "--emulator", "--number-of-products", "0" });
     config.AddExample(new[] { "--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\"" });
     config.AddExample(new[] { "--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\"", "--number-of-employees", "100" });
     config.AddExample(new[] { "--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\"", "--number-of-products", "500" });

@@ -11,6 +11,7 @@
     <Company>Microsoft</Company>
     <PackageTags>Azure;Cosmos DB;Cosmos;NoSQL;DocumentDb;CosmosDB</PackageTags>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
     <Description>
       Library that generates fictiuous data and populate an Azure Cosmos DB for NoSQL account with the data.
     </Description>
@@ -23,6 +24,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CosmicWorks.Data\CosmicWorks.Data.csproj" />
+    <None Include="..\..\LICENSE.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.35.3-preview" />

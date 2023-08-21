@@ -7,13 +7,13 @@ jobs:
     container: mcr.microsoft.com/dotnet/sdk:7.0
     defaults:
       run:
-        working-directory: ./src/dotnet
+        working-directory: ./src
     steps:
       - name: Checkout code
         uses: actions/checkout@v3        
       - name: Check .NET version
-        run: dotnet --version       
+        run: dotnet --version
       - name: Build .NET project
-        run: dotnet build cosmicworks.sln
+        run: dotnet build CosmicWorks.sln
       - name: Check .NET code format
-        run: dotnet format cosmicworks.sln --verify-no-changes
+        run: dotnet format CosmicWorks.sln --verify-no-changes

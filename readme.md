@@ -1,15 +1,15 @@
-# `CosmicWorks` command-line tool
+# CosmicWorks command-line tool and libraries for .NET
 
-> *We are rebuilding cosmicworks as an open-source tool! Watch this repo and follow along as we work to v2 of this tool.*
+> *We are rebuilding cosmicworks as an open-source set of libraries and tools! Watch this repo and follow along as we work to v2 of this tool.*
 
-## .NET
+## NuGet links
 
-```powershell
-dotnet tool install cosmicworks --global --prerelease
-```
+- [``CosmicWorks``](https://www.nuget.org/packages/cosmicworks)
+- [``CosmicWorks.Data``](https://www.nuget.org/packages/cosmicworks.data)
+- [``CosmicWorks.Generator``](https://www.nuget.org/packages/cosmicworks.generator)
 
-[![Graphical button with text "more info".](https://placehold.co/140x34/091F2C/8DC8E8?font=source-sans-pro&text=More+info)](src/dotnet/readme.md)
+## Component source code
 
-## Node.js
-
-> *Planned for the future...*
+- [``CosmicWorks`` tool](src/CosmicWorks.Tool/readme.md)
+- [``CosmicWorks.Data`` fictituous data library](src/CosmicWorks.Data/readme.md)
+- [``CosmicWorks.Generator`` data seeding library](src/CosmicWorks.Generator/readme.md)

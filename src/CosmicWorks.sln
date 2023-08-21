@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CosmicWorks.Tool", "CosmicWorks.Tool\CosmicWorks.Tool.csproj", "{C6ACB54A-B18C-4097-9133-5FD02029C329}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CosmicWorks.Data", "CosmicWorks.Data\CosmicWorks.Data.csproj", "{F9F7E2AB-EB54-4C86-8B9D-AF9CC868E27F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CosmicWorks.Generator", "CosmicWorks.Generator\CosmicWorks.Generator.csproj", "{101501FC-9884-4DCD-8B30-424BB66F3ECD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15208D23-E881-4890-8478-8608AEA8101B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15208D23-E881-4890-8478-8608AEA8101B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15208D23-E881-4890-8478-8608AEA8101B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15208D23-E881-4890-8478-8608AEA8101B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6ACB54A-B18C-4097-9133-5FD02029C329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6ACB54A-B18C-4097-9133-5FD02029C329}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6ACB54A-B18C-4097-9133-5FD02029C329}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6ACB54A-B18C-4097-9133-5FD02029C329}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9F7E2AB-EB54-4C86-8B9D-AF9CC868E27F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9F7E2AB-EB54-4C86-8B9D-AF9CC868E27F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9F7E2AB-EB54-4C86-8B9D-AF9CC868E27F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9F7E2AB-EB54-4C86-8B9D-AF9CC868E27F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{101501FC-9884-4DCD-8B30-424BB66F3ECD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{101501FC-9884-4DCD-8B30-424BB66F3ECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{101501FC-9884-4DCD-8B30-424BB66F3ECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{101501FC-9884-4DCD-8B30-424BB66F3ECD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

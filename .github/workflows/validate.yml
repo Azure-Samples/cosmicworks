@@ -13,9 +13,7 @@ jobs:
         uses: actions/checkout@v3        
       - name: Check .NET version
         run: dotnet --version
-      - name: Print recursive path
-        run: find .
       - name: Build .NET project
-        run: dotnet build
+        run: dotnet build CosmicWorks.sln
       - name: Check .NET code format
-        run: dotnet format --verify-no-changes
+        run: dotnet format CosmicWorks.sln --verify-no-changes

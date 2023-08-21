@@ -69,7 +69,7 @@ classDiagram
 
 ### Products
 
-```json
+```mermaid
 classDiagram
     direction RL
     Product "1" --* "1" Category

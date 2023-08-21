@@ -6,7 +6,8 @@ public sealed record Product(
     Category Category,
     string SKU,
     IList<string> Tags,
-    decimal Price
+    decimal Price,
+    string Type = nameof(Product)
 )
 {
     public string Id { get; init; } = $"{Guid.NewGuid()}";

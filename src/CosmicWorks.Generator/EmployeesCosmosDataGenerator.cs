@@ -15,7 +15,7 @@ public class EmployeesCosmosDataGenerator : ICosmosDataGenerator<Employee>
         _dataSource = dataSource;
     }
 
-    public async Task GenerateAsync(string connectionString, string databaseName, string containerName, int count)
+    public async Task GenerateAsync(string connectionString, string databaseName, string containerName, int count, Action<string> onItemCreate)
     {
         var seedItems = await _dataSource.GetItemsAsync(count);
         await _cosmosContext.SeedDataAsync<Employee>(
@@ -23,6 +23,7 @@ public class EmployeesCosmosDataGenerator : ICosmosDataGenerator<Employee>
             databaseName,
             containerName,
             seedItems,
+            onItemCreate,
             "/company",
             "/department",
             "/territory"

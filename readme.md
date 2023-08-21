@@ -1,21 +1,15 @@
-# `CosmicWorks` command-line tool for .NET
+# CosmicWorks command-line tool and libraries for .NET
 
-> *We are rebuilding cosmicworks as an open-source tool! Watch this repo and follow along as we work to v2 of this tool.*
+> *We are rebuilding cosmicworks as an open-source set of libraries and tools! Watch this repo and follow along as we work to v2 of this tool.*
 
-## NuGet link
+## NuGet links
 
-<https://www.nuget.org/packages/cosmicworks>
+- [``CosmicWorks``](https://www.nuget.org/packages/cosmicworks)
+- [``CosmicWorks.Data``](https://www.nuget.org/packages/cosmicworks.data)
+- [``CosmicWorks.Generator``](https://www.nuget.org/packages/cosmicworks.generator)
 
-## Install
+## Component source code
 
-```powershell
-dotnet tool install cosmicworks --global --prerelease
-```
-
-## Use
-
-```powershell
-cosmicworks --emulator
-
-cosmicworks --connection-string <CONNECTION_STRING>
-```
+- [``CosmicWorks`` tool](src/CosmicWorks.Tool/readme.md)
+- [``CosmicWorks.Data``` fictituous data library](src/CosmicWorks.Data/readme.md)
+- [``CosmicWorks.Generator`` data seeding library](src/CosmicWorks.Generator/readme.md)

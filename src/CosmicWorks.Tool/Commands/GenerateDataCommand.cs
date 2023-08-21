@@ -27,23 +27,63 @@ public sealed class GenerateDataCommand : AsyncCommand<GenerateDataSettings>
 
         Console.WriteLine(); Console.Write(new Rule("[yellow]Populating data[/]").LeftJustified().RuleStyle("olive")); Console.WriteLine();
 
+        string databaseName = "cosmicworks";
+
         if (settings.NumberOfEmployees > 0)
         {
+            string containerName = "employees";
+
+            var grid = new Grid();
+            grid.AddColumn();
+            grid.AddColumn();
+            grid.AddRow("[green bold]Database[/]", $"[teal]{databaseName}[/]");
+            grid.AddRow("[green bold]Container[/]", $"[teal]{containerName}[/]");
+            grid.AddRow("[green bold]Count[/]", $"[teal]{settings.NumberOfEmployees:##,#}[/]");
+
+            Console.Write(
+                new Panel(grid)
+                    .Header("[green bold]Employees configuration[/]")
+                    .BorderColor(Color.White)
+                    .RoundedBorder()
+                    .Expand()
+            );
+            Console.WriteLine();
+
             await _employeeGenerator.GenerateAsync(
                 connectionString: connectionString,
-                databaseName: "cosmicworks",
-                containerName: "employees",
-                count: settings.NumberOfEmployees
+                databaseName: databaseName,
+                containerName: containerName,
+                count: settings.NumberOfEmployees,
+                (output) => Console.MarkupLine($"[green][bold][[NEW]][/]\t{output}[/]")
             );
         }
 
         if (settings.NumberOfProducts > 0)
         {
+            string containerName = "products";
+
+            var grid = new Grid();
+            grid.AddColumn();
+            grid.AddColumn();
+            grid.AddRow("[green bold]Database[/]", $"[teal]{databaseName}[/]");
+            grid.AddRow("[green bold]Container[/]", $"[teal]{containerName}[/]");
+            grid.AddRow("[green]Count[/]", $"[teal]{settings.NumberOfProducts:##,#}[/]");
+
+            Console.Write(
+                new Panel(grid)
+                    .Header("[green]Products configuration[/]")
+                    .BorderColor(Color.White)
+                    .RoundedBorder()
+                    .Expand()
+            );
+            Console.WriteLine();
+
             await _productGenerator.GenerateAsync(
                 connectionString: connectionString,
-                databaseName: "cosmicworks",
-                containerName: "products",
-                count: settings.NumberOfProducts
+                databaseName: databaseName,
+                containerName: containerName,
+                count: settings.NumberOfProducts,
+                (output) => Console.MarkupLine($"[green][bold][[NEW]][/]\t{output}[/]")
             );
         }
 

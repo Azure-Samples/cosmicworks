@@ -8,7 +8,7 @@ public sealed record Employee(
     string EmailAddress,
     string PhoneNumber,
     string Territory,
-    string Type = "employee"
+    string Type = nameof(Employee)
 )
 {
     public string Id { get; init; } = $"{Guid.NewGuid()}";

@@ -11,5 +11,5 @@
 ## Component source code
 
 - [``CosmicWorks`` tool](src/CosmicWorks.Tool/readme.md)
-- [``CosmicWorks.Data``` fictituous data library](src/CosmicWorks.Data/readme.md)
+- [``CosmicWorks.Data`` fictituous data library](src/CosmicWorks.Data/readme.md)
 - [``CosmicWorks.Generator`` data seeding library](src/CosmicWorks.Generator/readme.md)

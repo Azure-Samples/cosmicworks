@@ -31,7 +31,7 @@ public sealed class GenerateDataCommand : AsyncCommand<GenerateDataSettings>
 
         Console.WriteLine(); Console.Write(new Rule("[yellow]Parsing connection string[/]").LeftJustified().RuleStyle("olive")); Console.WriteLine();
 
-        string connectionString = RetrieveConnectionString(settings.ConnectionString, settings.Emulator);
+        string connectionString = RetrieveConnectionString(settings.ConnectionString, settings.Emulator, settings.HideCredentials is false);
 
         Console.WriteLine(); Console.Write(new Rule("[yellow]Populating data[/]").LeftJustified().RuleStyle("olive")); Console.WriteLine();
 
@@ -98,7 +98,7 @@ public sealed class GenerateDataCommand : AsyncCommand<GenerateDataSettings>
         return 0;
     }
 
-    private static string RetrieveConnectionString(string? connectionString, bool emulator)
+    private static string RetrieveConnectionString(string? connectionString, bool emulator, bool showCredentials)
     {
         if (emulator)
         {
@@ -122,7 +122,7 @@ public sealed class GenerateDataCommand : AsyncCommand<GenerateDataSettings>
         }
 
         Console.Write(
-            new Panel($"[teal]{connectionString}[/]")
+            new Panel(showCredentials ? $"[teal]{connectionString}[/]" : $"[teal dim]{new String('*', connectionString.Length)}[/]")
                 .Header("[green]Connection string[/]")
                 .BorderColor(Color.White)
                 .RoundedBorder()

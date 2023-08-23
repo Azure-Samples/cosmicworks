@@ -26,6 +26,10 @@ public sealed class GenerateDataSettings : CommandSettings
     [CommandOption("-v|--version <VERSION>")]
     public bool RenderVersion { get; init; } = false;
 
+    [Description("Hides the credentials.")]
+    [CommandOption("--hide-credentials <HIDE_CREDENTIALS>", IsHidden = true)]
+    public bool? HideCredentials { get; init; } = false;
+
     public override ValidationResult Validate()
     {
         return (NumberOfProducts, NumberOfEmployees) switch

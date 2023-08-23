@@ -5,7 +5,6 @@ using Spectre.Console;
 using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using Console = Spectre.Console.AnsiConsole;
 
 namespace CosmicWorks.Tool.Commands;
 
@@ -22,91 +21,30 @@ public sealed class GenerateDataCommand : AsyncCommand<GenerateDataSettings>
 
     public override async Task<int> ExecuteAsync([NotNull] CommandContext context, [NotNull] GenerateDataSettings settings)
     {
+        AnsiConsoleSettings consoleSettings = new()
+        {
+            Ansi = settings.DisableFormatting is false ? AnsiSupport.Detect : AnsiSupport.No,
+            ColorSystem = settings.DisableFormatting is false ? ColorSystemSupport.Detect : ColorSystemSupport.NoColors
+        };
+        IAnsiConsole ansiConsole = AnsiConsole.Create(consoleSettings);
+
         if (settings.RenderVersion)
         {
             string? version = Assembly.GetExecutingAssembly()?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
-            Console.MarkupLine($"[teal][bold][[VERSION]][/]\t{version}[/]");
+            ansiConsole.MarkupLine($"[teal][bold][[VERSION]][/]\t{version}[/]");
             return 0;
         }
 
-        Console.WriteLine(); Console.Write(new Rule("[yellow]Parsing connection string[/]").LeftJustified().RuleStyle("olive")); Console.WriteLine();
+        ansiConsole.Write(new Rule("[yellow]Parsing connection string[/]").LeftJustified().RuleStyle("olive"));
 
-        string connectionString = RetrieveConnectionString(settings.ConnectionString, settings.Emulator, settings.HideCredentials is false);
-
-        Console.WriteLine(); Console.Write(new Rule("[yellow]Populating data[/]").LeftJustified().RuleStyle("olive")); Console.WriteLine();
-
-        string databaseName = "cosmicworks";
-
-        if (settings.NumberOfEmployees > 0)
-        {
-            string containerName = "employees";
-
-            var grid = new Grid();
-            grid.AddColumn();
-            grid.AddColumn();
-            grid.AddRow("[green bold]Database[/]", $"[teal]{databaseName}[/]");
-            grid.AddRow("[green bold]Container[/]", $"[teal]{containerName}[/]");
-            grid.AddRow("[green bold]Count[/]", $"[teal]{settings.NumberOfEmployees:##,#}[/]");
-
-            Console.Write(
-                new Panel(grid)
-                    .Header("[green bold]Employees configuration[/]")
-                    .BorderColor(Color.White)
-                    .RoundedBorder()
-                    .Expand()
-            );
-            Console.WriteLine();
-
-            await _employeeGenerator.GenerateAsync(
-                connectionString: connectionString,
-                databaseName: databaseName,
-                containerName: containerName,
-                count: settings.NumberOfEmployees,
-                (output) => Console.MarkupLine($"[green][bold][[NEW]][/]\t{output}[/]")
-            );
-        }
-
-        if (settings.NumberOfProducts > 0)
-        {
-            string containerName = "products";
-
-            var grid = new Grid();
-            grid.AddColumn();
-            grid.AddColumn();
-            grid.AddRow("[green bold]Database[/]", $"[teal]{databaseName}[/]");
-            grid.AddRow("[green bold]Container[/]", $"[teal]{containerName}[/]");
-            grid.AddRow("[green]Count[/]", $"[teal]{settings.NumberOfProducts:##,#}[/]");
-
-            Console.Write(
-                new Panel(grid)
-                    .Header("[green]Products configuration[/]")
-                    .BorderColor(Color.White)
-                    .RoundedBorder()
-                    .Expand()
-            );
-            Console.WriteLine();
-
-            await _productGenerator.GenerateAsync(
-                connectionString: connectionString,
-                databaseName: databaseName,
-                containerName: containerName,
-                count: settings.NumberOfProducts,
-                (output) => Console.MarkupLine($"[green][bold][[NEW]][/]\t{output}[/]")
-            );
-        }
-
-        return 0;
-    }
-
-    private static string RetrieveConnectionString(string? connectionString, bool emulator, bool showCredentials)
-    {
-        if (emulator)
+        string? connectionString;
+        if (settings.Emulator)
         {
             connectionString = "AccountEndpoint=https://localhost:8081/;AccountKey=C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==";
         }
         else
         {
-            connectionString ??= Console.Prompt(
+            connectionString = ansiConsole.Prompt(
                 new TextPrompt<string>("What is your [teal]connection string[/]?")
                     .PromptStyle("teal")
                     .ValidationErrorMessage("[bold red]That's not a valid connection string[/].")
@@ -121,14 +59,74 @@ public sealed class GenerateDataCommand : AsyncCommand<GenerateDataSettings>
             );
         }
 
-        Console.Write(
-            new Panel(showCredentials ? $"[teal]{connectionString}[/]" : $"[teal dim]{new String('*', connectionString.Length)}[/]")
+        ansiConsole.Write(
+            new Panel(settings.HideCredentials is false ? $"[teal]{connectionString}[/]" : $"[teal dim]{new String('*', connectionString.Length)}[/]")
                 .Header("[green]Connection string[/]")
                 .BorderColor(Color.White)
                 .RoundedBorder()
                 .Expand()
         );
 
-        return connectionString;
+        ansiConsole.Write(new Rule("[yellow]Populating data[/]").LeftJustified().RuleStyle("olive"));
+
+        string databaseName = "cosmicworks";
+
+        if (settings.NumberOfEmployees > 0)
+        {
+            string containerName = "employees";
+
+            var grid = new Grid();
+            grid.AddColumn();
+            grid.AddColumn();
+            grid.AddRow("[green bold]Database[/]", $"[teal]{databaseName}[/]");
+            grid.AddRow("[green bold]Container[/]", $"[teal]{containerName}[/]");
+            grid.AddRow("[green bold]Count[/]", $"[teal]{settings.NumberOfEmployees:##,#}[/]");
+
+            ansiConsole.Write(
+                new Panel(grid)
+                    .Header("[green bold]Employees configuration[/]")
+                    .BorderColor(Color.White)
+                    .RoundedBorder()
+                    .Expand()
+            );
+
+            await _employeeGenerator.GenerateAsync(
+                connectionString: connectionString,
+                databaseName: databaseName,
+                containerName: containerName,
+                count: settings.NumberOfEmployees,
+                (output) => ansiConsole.MarkupLine($"[green][bold][[NEW]][/]\t{output}[/]")
+            );
+        }
+
+        if (settings.NumberOfProducts > 0)
+        {
+            string containerName = "products";
+
+            var grid = new Grid();
+            grid.AddColumn();
+            grid.AddColumn();
+            grid.AddRow("[green bold]Database[/]", $"[teal]{databaseName}[/]");
+            grid.AddRow("[green bold]Container[/]", $"[teal]{containerName}[/]");
+            grid.AddRow("[green]Count[/]", $"[teal]{settings.NumberOfProducts:##,#}[/]");
+
+            ansiConsole.Write(
+                new Panel(grid)
+                    .Header("[green]Products configuration[/]")
+                    .BorderColor(Color.White)
+                    .RoundedBorder()
+                    .Expand()
+            );
+
+            await _productGenerator.GenerateAsync(
+                connectionString: connectionString,
+                databaseName: databaseName,
+                containerName: containerName,
+                count: settings.NumberOfProducts,
+                (output) => ansiConsole.MarkupLine($"[green][bold][[NEW]][/]\t{output}[/]")
+            );
+        }
+
+        return 0;
     }
 }

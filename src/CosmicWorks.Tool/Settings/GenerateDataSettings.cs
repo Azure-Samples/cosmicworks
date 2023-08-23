@@ -30,6 +30,10 @@ public sealed class GenerateDataSettings : CommandSettings
     [CommandOption("--hide-credentials <HIDE_CREDENTIALS>", IsHidden = true)]
     public bool? HideCredentials { get; init; } = false;
 
+    [Description("Disables ANSI and color formatting for console output.")]
+    [CommandOption("--disable-formatting <DISABLE_FORMATTING>", IsHidden = true)]
+    public bool? DisableFormatting { get; init; } = false;
+
     public override ValidationResult Validate()
     {
         return (NumberOfProducts, NumberOfEmployees) switch

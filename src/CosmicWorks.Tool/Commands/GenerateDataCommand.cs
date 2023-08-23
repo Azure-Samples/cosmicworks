@@ -37,14 +37,14 @@ public sealed class GenerateDataCommand : AsyncCommand<GenerateDataSettings>
 
         ansiConsole.Write(new Rule("[yellow]Parsing connection string[/]").LeftJustified().RuleStyle("olive"));
 
-        string? connectionString;
+        string? connectionString = settings.ConnectionString;
         if (settings.Emulator)
         {
             connectionString = "AccountEndpoint=https://localhost:8081/;AccountKey=C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==";
         }
         else
         {
-            connectionString = ansiConsole.Prompt(
+            connectionString ??= ansiConsole.Prompt(
                 new TextPrompt<string>("What is your [teal]connection string[/]?")
                     .PromptStyle("teal")
                     .ValidationErrorMessage("[bold red]That's not a valid connection string[/].")

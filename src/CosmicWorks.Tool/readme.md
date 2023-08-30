@@ -1,6 +1,6 @@
 # ``CosmicWorks`` command-line tool for .NET
 
-> *We are rebuilding cosmicworks as an open-source set of libraries and tools! Watch this repo and follow along as we work to v2 of this tool.*
+CosmicWorks is an open source set of tools and libraries to generate data quickly for your proof of concept or sample applications.
 
 ## NuGet link
 
@@ -8,21 +8,29 @@
 
 ## Install
 
-```powershell
-dotnet tool install cosmicworks --global --prerelease
+```bash
+dotnet tool install --global cosmicworks
 ```
 
 ## Examples
 
-```powershell
-cosmicworks --version
+- Generate all data in the [Azure Cosmos DB emulator](https://learn.microsoft.com/azure/cosmos-db/emulator).
 
-cosmicworks --help
+    ```bash
+    cosmicworks --emulator
+    ```
 
-cosmicworks --emulator
+- Generate all data in a live [Azure Cosmos DB for NoSQL](https://learn.microsoft.com/azure/cosmos-db/nosql/) account.
 
-cosmicworks --connection-string "<API_FOR_NOSQL_CONNECTION_STRING>"
-```
+    ```bash
+    cosmicworks --connection-string "<API_FOR_NOSQL_CONNECTION_STRING>"
+    ```
+
+- Generate a subset of data.
+
+    ```bash
+    cosmicworks --emulator --number-of-products 0 --number-of-employees 50
+    ```
 
 ## Arguments
 
@@ -39,3 +47,4 @@ cosmicworks --connection-string "<API_FOR_NOSQL_CONNECTION_STRING>"
 
 - [``CosmicWorks.Data`` fictituous data library](https://www.nuget.org/packages/cosmicworks.data)
 - [``CosmicWorks.Generator`` data seeding library](https://www.nuget.org/packages/cosmicworks.generator)
+- [``CosmicWorks.Models`` model library](https://www.nuget.org/packages/cosmicworks.models)

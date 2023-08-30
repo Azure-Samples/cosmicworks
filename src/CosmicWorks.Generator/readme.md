@@ -1,6 +1,6 @@
 # ``CosmicWorks.Generator`` data seeding library
 
-> *We are rebuilding cosmicworks as an open-source set of libraries and tools! Watch this repo and follow along as we work to v2 of this tool.*
+CosmicWorks is an open source set of tools and libraries to generate data quickly for your proof of concept or sample applications.
 
 ## Overview
 
@@ -103,3 +103,4 @@ Here's samples of the JSON data created using this tool with system-properties o
 
 - [``CosmicWorks`` data generation CLI tool](https://www.nuget.org/packages/cosmicworks)
 - [``CosmicWorks.Data`` fictituous data library](https://www.nuget.org/packages/cosmicworks.data)
+- [``CosmicWorks.Models`` model library](https://www.nuget.org/packages/cosmicworks.models)

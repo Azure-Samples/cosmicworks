@@ -16,11 +16,11 @@ public sealed class GenerateDataSettings : CommandSettings
 
     [Description("The number of products to generate.")]
     [CommandOption("--number-of-products <NUMBER_OF_PRODUCTS>")]
-    public int NumberOfProducts { get; init; } = 1000;
+    public int NumberOfProducts { get; init; } = 1759;
 
     [Description("The number of employees to generate.")]
     [CommandOption("--number-of-employees <NUMBER_OF_EMPLOYEES>")]
-    public int NumberOfEmployees { get; init; } = 200;
+    public int NumberOfEmployees { get; init; } = 234;
 
     [Description("Gets the version of the tool.")]
     [CommandOption("-v|--version <VERSION>")]

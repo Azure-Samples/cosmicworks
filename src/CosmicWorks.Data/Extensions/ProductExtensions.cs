@@ -1,4 +1,4 @@
-using CosmicWorks.Data.Models;
+using CosmicWorks.Models;
 
 namespace CosmicWorks.Data.Extensions;
 

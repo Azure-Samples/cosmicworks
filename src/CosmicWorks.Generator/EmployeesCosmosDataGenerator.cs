@@ -1,5 +1,5 @@
 ﻿using CosmicWorks.Data;
-using CosmicWorks.Data.Models;
+using CosmicWorks.Models;
 using CosmicWorks.Generator.DataSource;
 using Microsoft.Azure.Cosmos;
 using System.Collections.ObjectModel;

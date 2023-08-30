@@ -1,5 +1,5 @@
 ﻿using CosmicWorks.Data.Extensions;
-using CosmicWorks.Data.Models;
+using CosmicWorks.Models;
 
 namespace CosmicWorks.Data;
 

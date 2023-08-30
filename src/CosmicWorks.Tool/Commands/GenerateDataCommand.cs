@@ -1,4 +1,4 @@
-using CosmicWorks.Data.Models;
+using CosmicWorks.Models;
 using CosmicWorks.Generator;
 using CosmicWorks.Tool.Settings;
 using Spectre.Console;

@@ -1,25 +1,24 @@
-using Bogus;
-using CosmicWorks.Data.Models;
+using CosmicWorks.Models;
 
 namespace CosmicWorks.Data.Extensions;
 
 internal static class ProductExtensions
 {
-    private static readonly Faker faker = new("en");
-
     public static IEnumerable<Product> ToProducts(this IEnumerable<Raw.Thing> items) =>
-    items.Select(i => new Product(
-            Name: i.Name,
-            Description: i.Description,
-            Category: new Category(
-                i.CategoryName,
-                new SubCategory(i.SubCategoryName)
-            ),
-            SKU: i.ProductNumber,
-            Tags: i.GetTags().ToList(),
-            Price: Decimal.Round(faker.Random.Decimal(min: 1, max: 1000), 2, MidpointRounding.AwayFromZero)
-        )
-    );
+        items.Select(i => new Product(
+                Id: $"{i.Id:00000000-0000-0000-0000-000000000000}",
+                Name: i.Name,
+                Description: i.Description,
+                Category: new Category(
+                    i.CategoryName,
+                    new SubCategory(i.SubCategoryName)
+                ),
+                SKU: i.ProductNumber,
+                Tags: i.GetTags().ToList(),
+                Cost: i.Cost,
+                Price: i.ListPrice
+            )
+        );
 
     public static IEnumerable<string> GetTags(this Raw.Thing thing)
     {

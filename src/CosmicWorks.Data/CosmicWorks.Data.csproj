@@ -25,6 +25,6 @@
     <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Bogus" Version="34.*" />
+    <ProjectReference Include="..\CosmicWorks.Models\CosmicWorks.Models.csproj" />
   </ItemGroup>
 </Project>

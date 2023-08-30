@@ -1,5 +1,5 @@
 ﻿using CosmicWorks.Data;
-using CosmicWorks.Data.Models;
+using CosmicWorks.Models;
 using CosmicWorks.Generator;
 using CosmicWorks.Generator.DataSource;
 using CosmicWorks.Tool.Commands;

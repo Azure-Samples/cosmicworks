@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CosmicWorks.Data", "CosmicW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CosmicWorks.Generator", "CosmicWorks.Generator\CosmicWorks.Generator.csproj", "{101501FC-9884-4DCD-8B30-424BB66F3ECD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CosmicWorks.Models", "CosmicWorks.Models\CosmicWorks.Models.csproj", "{3E6D2E8B-9789-4B8B-B5B1-AFD9FD95E5DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,5 +36,9 @@ Global
 		{101501FC-9884-4DCD-8B30-424BB66F3ECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{101501FC-9884-4DCD-8B30-424BB66F3ECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{101501FC-9884-4DCD-8B30-424BB66F3ECD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E6D2E8B-9789-4B8B-B5B1-AFD9FD95E5DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E6D2E8B-9789-4B8B-B5B1-AFD9FD95E5DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E6D2E8B-9789-4B8B-B5B1-AFD9FD95E5DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E6D2E8B-9789-4B8B-B5B1-AFD9FD95E5DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

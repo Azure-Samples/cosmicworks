@@ -1,14 +1,12 @@
-using Bogus;
-using CosmicWorks.Data.Models;
+using CosmicWorks.Models;
 
 namespace CosmicWorks.Data.Extensions;
 
 internal static class EmployeeExtensions
 {
-    private static readonly Faker faker = new("en");
-
     public static IEnumerable<Employee> ToEmployees(this IEnumerable<Raw.Person> items) =>
         items.Select(i => new Employee(
+                Id: $"{i.Id:00000000-0000-0000-0000-000000000000}",
                 Name: new Name(
                     First: i.First,
                     Last: i.Last
@@ -23,9 +21,9 @@ internal static class EmployeeExtensions
                     )
                 },
                 Company: "Adventure Works",
-                Department: faker.Random.ArrayElement<string>("HR", "IT", "Marketing", "Sales"),
+                Department: i.Department,
                 EmailAddress: $"{i.First.ToLowerInvariant()}@adventure-works.com",
-                PhoneNumber: $"425-555-{faker.Random.Int(min: 100, max: 199):0000}",
+                PhoneNumber: $"425-555-{i.PhoneNumberSuffix}",
                 Territory: i.Region,
                 Type: "employee"
             )

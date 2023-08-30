@@ -38,5 +38,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CosmicWorks.Generator\CosmicWorks.Generator.csproj" />
+    <ProjectReference Include="..\CosmicWorks.Models\CosmicWorks.Models.csproj" />
   </ItemGroup>
 </Project>

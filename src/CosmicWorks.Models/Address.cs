@@ -1,4 +1,4 @@
-namespace CosmicWorks.Data.Models;
+namespace CosmicWorks.Models;
 
 public sealed record Address(
     string Name,

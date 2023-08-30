@@ -1,4 +1,4 @@
-using CosmicWorks.Data.Models;
+using CosmicWorks.Models;
 using CosmicWorks.Generator;
 using CosmicWorks.Tool.Settings;
 using Spectre.Console;
@@ -90,12 +90,14 @@ public sealed class GenerateDataCommand : AsyncCommand<GenerateDataSettings>
                     .Expand()
             );
 
+            ansiConsole.MarkupLine("[grey dim italic][bold]Warning[/]: Items are generated in parallel and the order of output logs may differ between runs.[/]");
+
             await _employeeGenerator.GenerateAsync(
                 connectionString: connectionString,
                 databaseName: databaseName,
                 containerName: containerName,
                 count: settings.NumberOfEmployees,
-                (output) => ansiConsole.MarkupLine($"[green][bold][[NEW]][/]\t{output}[/]")
+                (output) => ansiConsole.MarkupLine($"[green][bold][[SEED]][/]\t{output}[/]")
             );
         }
 
@@ -123,7 +125,7 @@ public sealed class GenerateDataCommand : AsyncCommand<GenerateDataSettings>
                 databaseName: databaseName,
                 containerName: containerName,
                 count: settings.NumberOfProducts,
-                (output) => ansiConsole.MarkupLine($"[green][bold][[NEW]][/]\t{output}[/]")
+                (output) => ansiConsole.MarkupLine($"[green][bold][[SEED]][/]\t{output}[/]")
             );
         }
 

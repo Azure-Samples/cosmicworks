@@ -16,11 +16,11 @@ public sealed class GenerateDataSettings : CommandSettings
 
     [Description("The number of products to generate.")]
     [CommandOption("--number-of-products <NUMBER_OF_PRODUCTS>")]
-    public int NumberOfProducts { get; init; } = 1000;
+    public int NumberOfProducts { get; init; } = 1759;
 
     [Description("The number of employees to generate.")]
     [CommandOption("--number-of-employees <NUMBER_OF_EMPLOYEES>")]
-    public int NumberOfEmployees { get; init; } = 200;
+    public int NumberOfEmployees { get; init; } = 234;
 
     [Description("Gets the version of the tool.")]
     [CommandOption("-v|--version <VERSION>")]
@@ -38,8 +38,8 @@ public sealed class GenerateDataSettings : CommandSettings
     {
         return (NumberOfProducts, NumberOfEmployees) switch
         {
-            ( > 1500, _) => ValidationResult.Error("You can't generate more than 1500 products."),
-            (_, > 200) => ValidationResult.Error("You can't generate more than 200 employees."),
+            ( > 1759, _) => ValidationResult.Error("You can't generate more than 1,759 products."),
+            (_, > 234) => ValidationResult.Error("You can't generate more than 234 employees."),
             ( <= 0, <= 0) => ValidationResult.Error("You must generate at least one product or employee."),
             _ => ValidationResult.Success(),
         };

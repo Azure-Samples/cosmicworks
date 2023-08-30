@@ -2,5 +2,5 @@ namespace CosmicWorks.Data;
 
 public interface IDataSource<T>
 {
-    Task<IReadOnlyList<T>> GetItemsAsync(int count);
+    IReadOnlyList<T> GetItems(int count);
 }

@@ -19,7 +19,7 @@ public class ProductsCosmosDataGenerator : ICosmosDataGenerator<Product>
 
     public async Task GenerateAsync(string connectionString, string databaseName, string containerName, int count, Action<string> onItemCreate)
     {
-        var seedItems = await _dataSource.GetItemsAsync(count);
+        var seedItems = _dataSource.GetItems(count);
 
         IndexingPolicy indexingPolicy = new()
         {

@@ -20,6 +20,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: Package NuGet stable models
+        if: ${{ inputs.versionSuffix == '' }}
+        run: dotnet pack CosmicWorks.Models/CosmicWorks.Models.csproj --output out/ --include-symbols /p:VersionPrefix="${{ inputs.versionPrefix }}"
+      - name: Package NuGet preview models
+        if: ${{ inputs.versionSuffix != '' }}
+        run: dotnet pack CosmicWorks.Models/CosmicWorks.Models.csproj --output out/ --include-symbols /p:VersionPrefix="${{ inputs.versionPrefix }}" /p:VersionSuffix="${{ inputs.versionSuffix }}"
       - name: Package NuGet stable library
         if: ${{ inputs.versionSuffix == '' }}
         run: dotnet pack CosmicWorks.Data/CosmicWorks.Data.csproj --output out/ --include-symbols /p:VersionPrefix="${{ inputs.versionPrefix }}"

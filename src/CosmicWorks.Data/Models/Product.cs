@@ -7,6 +7,7 @@ public sealed record Product(
     Category Category,
     string SKU,
     IList<string> Tags,
+    decimal Cost,
     decimal Price,
     string Type = nameof(Product)
 )

@@ -14,10 +14,10 @@ public sealed class EmployeesDataSource : IDataSource<Employee>
             _ => count
         };
 
-        IEnumerable<Employee> employees = Raw.People.Get()
+        return Raw.People.Get()
             .OrderBy(i => i.Id)
-            .ToEmployees();
-
-        return employees.Take(generatedEmployeesCount).ToList();
+            .Take(generatedEmployeesCount)
+            .ToEmployees()
+            .ToList();
     }
 }

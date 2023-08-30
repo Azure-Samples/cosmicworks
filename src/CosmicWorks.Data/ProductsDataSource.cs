@@ -14,10 +14,10 @@ public sealed class ProductsDataSource : IDataSource<Product>
             _ => count
         };
 
-        IEnumerable<Product> products = Raw.Things.Get()
+        return Raw.Things.Get()
             .OrderBy(i => i.Id)
-            .ToProducts();
-
-        return products.Take(generatedProductsCount).ToList();
+            .Take(generatedProductsCount)
+            .ToProducts()
+            .ToList();
     }
 }

@@ -90,6 +90,8 @@ public sealed class GenerateDataCommand : AsyncCommand<GenerateDataSettings>
                     .Expand()
             );
 
+            ansiConsole.MarkupLine("[grey dim italic][bold]Warning[/]: Items are generated in parallel and the order of output logs may differ between runs.[/]");
+
             await _employeeGenerator.GenerateAsync(
                 connectionString: connectionString,
                 databaseName: databaseName,

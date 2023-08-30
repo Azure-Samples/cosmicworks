@@ -12,7 +12,7 @@
     <ToolCommandName>cosmicworks</ToolCommandName>
     <PackageOutputPath>./pkg</PackageOutputPath>
     <PackageId>CosmicWorks</PackageId>
-    <Authors>Sidney Andrews</Authors>
+    <Authors>Microsoft</Authors>
     <Company>Microsoft</Company>
     <PackageTags>Azure;Cosmos DB;Cosmos;NoSQL;DocumentDb;Tool;CLI;CosmosDB</PackageTags>
     <PackageReadmeFile>readme.md</PackageReadmeFile>

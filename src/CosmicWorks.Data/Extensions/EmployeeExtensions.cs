@@ -9,6 +9,7 @@ internal static class EmployeeExtensions
 
     public static IEnumerable<Employee> ToEmployees(this IEnumerable<Raw.Person> items) =>
         items.Select(i => new Employee(
+                Id: i.Id,
                 Name: new Name(
                     First: i.First,
                     Last: i.Last

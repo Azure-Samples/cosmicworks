@@ -1,6 +1,7 @@
 namespace CosmicWorks.Data.Models;
 
 public sealed record Employee(
+    string Id,
     Name Name,
     IList<Address> Addresses,
     string Company,
@@ -11,7 +12,5 @@ public sealed record Employee(
     string Type = nameof(Employee)
 )
 {
-    public string Id { get; init; } = $"{Guid.NewGuid()}";
-
     public override string ToString() => $"{Id} | {Name.First} {Name.Last}";
 }

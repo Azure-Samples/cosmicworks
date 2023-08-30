@@ -9,6 +9,7 @@ internal static class ProductExtensions
 
     public static IEnumerable<Product> ToProducts(this IEnumerable<Raw.Thing> items) =>
     items.Select(i => new Product(
+            Id: i.Id,
             Name: i.Name,
             Description: i.Description,
             Category: new Category(

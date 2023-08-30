@@ -1,6 +1,7 @@
 namespace CosmicWorks.Data.Models;
 
 public sealed record Product(
+    string Id,
     string Name,
     string Description,
     Category Category,
@@ -10,7 +11,5 @@ public sealed record Product(
     string Type = nameof(Product)
 )
 {
-    public string Id { get; init; } = $"{Guid.NewGuid()}";
-
     public override string ToString() => $"{Id} | {Name} - {Category.Name}";
 }

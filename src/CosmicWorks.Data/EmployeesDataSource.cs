@@ -5,21 +5,19 @@ namespace CosmicWorks.Data;
 
 public sealed class EmployeesDataSource : IDataSource<Employee>
 {
-    public async Task<IReadOnlyList<Employee>> GetItemsAsync(int count = 200)
+    public IReadOnlyList<Employee> GetItems(int count = 234)
     {
         int generatedEmployeesCount = count switch
         {
-            > 200 => throw new ArgumentOutOfRangeException(nameof(count), "You cannot generate more than 200 employees."),
+            > 234 => throw new ArgumentOutOfRangeException(nameof(count), "You cannot generate more than 234 employees."),
             < 1 => throw new ArgumentOutOfRangeException(nameof(count), "You must generate at least one employee"),
             _ => count
         };
 
-        await Task.Delay(TimeSpan.FromSeconds(1));
-
         IEnumerable<Employee> employees = Raw.People.Get()
-            .OrderBy(i => Guid.NewGuid())
+            .OrderBy(i => i.Id)
             .ToEmployees();
 
-        return employees.Take(count).ToList();
+        return employees.Take(generatedEmployeesCount).ToList();
     }
 }

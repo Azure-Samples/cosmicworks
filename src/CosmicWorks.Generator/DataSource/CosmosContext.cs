@@ -5,7 +5,9 @@ namespace CosmicWorks.Generator.DataSource;
 
 public sealed class CosmosContext : ICosmosContext
 {
-    public async Task SeedDataAsync<T>(string connectionString, string databaseName, string containerName, IEnumerable<T> items, Action<string> onCreated, params string[] partitionKeyPaths)
+    private const int _databaseThroughput = 400;
+
+    public async Task SeedDataAsync<T>(string connectionString, string databaseName, ContainerProperties containerProperties, IEnumerable<T> items, Action<string> onCreated)
     {
         using CosmosClient client = new CosmosClientBuilder(connectionString)
             .WithSerializerOptions(new CosmosSerializationOptions()
@@ -21,14 +23,11 @@ public sealed class CosmosContext : ICosmosContext
 
         Database database = await client.CreateDatabaseIfNotExistsAsync(
             id: databaseName,
-            throughput: 400
+            throughput: _databaseThroughput
         );
 
         Container container = await database.CreateContainerIfNotExistsAsync(
-            new ContainerProperties(
-                id: containerName,
-                partitionKeyPaths: partitionKeyPaths.ToList()
-            )
+            containerProperties: containerProperties
         );
 
         if (database is not null && container is not null)

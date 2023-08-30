@@ -97,7 +97,7 @@ public sealed class GenerateDataCommand : AsyncCommand<GenerateDataSettings>
                 databaseName: databaseName,
                 containerName: containerName,
                 count: settings.NumberOfEmployees,
-                (output) => ansiConsole.MarkupLine($"[green][bold][[NEW]][/]\t{output}[/]")
+                (output) => ansiConsole.MarkupLine($"[green][bold][[SEED]][/]\t{output}[/]")
             );
         }
 
@@ -125,7 +125,7 @@ public sealed class GenerateDataCommand : AsyncCommand<GenerateDataSettings>
                 databaseName: databaseName,
                 containerName: containerName,
                 count: settings.NumberOfProducts,
-                (output) => ansiConsole.MarkupLine($"[green][bold][[NEW]][/]\t{output}[/]")
+                (output) => ansiConsole.MarkupLine($"[green][bold][[SEED]][/]\t{output}[/]")
             );
         }
 

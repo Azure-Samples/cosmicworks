@@ -4,7 +4,7 @@ jobs:
   validate-dotnet:
     name: Validate .NET project
     runs-on: ubuntu-latest
-    container: mcr.microsoft.com/dotnet/sdk:7.0
+    container: mcr.microsoft.com/dotnet/sdk:8.0
     defaults:
       run:
         working-directory: ./src

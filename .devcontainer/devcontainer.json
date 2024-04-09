@@ -1,6 +1,6 @@
 {
-    "name": ".NET 7 development environment",
-    "image": "mcr.microsoft.com/devcontainers/dotnet:7.0",
+    "name": ".NET 8 development environment",
+    "image": "mcr.microsoft.com/devcontainers/dotnet:8.0",
     "customizations": {
         "vscode": {
             "extensions": [

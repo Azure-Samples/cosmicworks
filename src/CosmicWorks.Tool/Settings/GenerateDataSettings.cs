@@ -34,6 +34,10 @@ public sealed class GenerateDataSettings : CommandSettings
     [CommandOption("--disable-formatting <DISABLE_FORMATTING>", IsHidden = true)]
     public bool? DisableFormatting { get; init; } = false;
 
+    [Description("Disables hierarchical partition keys and uses only the first partition key value.")]
+    [CommandOption("--disable-hierarchical-partition-keys")]
+    public bool? DisableHierarchicalPartitionKeys { get; init; } = false;
+
     public override ValidationResult Validate()
     {
         return (NumberOfProducts, NumberOfEmployees) switch

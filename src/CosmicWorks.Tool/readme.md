@@ -1,4 +1,4 @@
-# ``CosmicWorks`` command-line tool for .NET
+# `CosmicWorks` command-line tool for .NET
 
 CosmicWorks is an open source set of tools and libraries to generate data quickly for your proof of concept or sample applications.
 
@@ -36,15 +36,16 @@ dotnet tool install --global cosmicworks
 
 | | Description | Remarks |
 | --- | --- | --- |
-| **``--connection-string`` (``-c``)** | Connection string to an Azure Cosmos DB for NoSQL account | *You may need to escape connection string characters or enclose the value in quotes within specific operation system shells. If not specified, the CLI will prompt you for a connection string value.* |
-| **``--emulator`` (``-e``)** | Use emulators connection string | *This setting has a higher precedent than ``--connection-string``. |
-| **``--number-of-products``** | Number of product items to generate | *This setting defaults to ``200``. If set to ``0``, the corresponding container will be skipped. You must set at least this setting or ``--number-of-employees`` to a positive integer value. |
-| **``--number-of-employees``** | Number of product items to generate | *This setting defaults to ``1000``. If set to ``0``, the corresponding container will be skipped. You must set at least this setting or ``--number-of-products`` to a positive integer value. |
-| **``--help`` (``-h``)** | Renders help information and examples. |
-| **``--version`` (``-v``)** | Renders version information. |
+| **`--connection-string` (`-c`)** | Connection string to an Azure Cosmos DB for NoSQL account | *You may need to escape connection string characters or enclose the value in quotes within specific operation system shells. If not specified, the CLI will prompt you for a connection string value.* |
+| **`--emulator` (`-e`)** | Use emulators connection string | *This setting has a higher precedent than `--connection-string`.* |
+| **`--number-of-products`** | Number of product items to generate | *This setting defaults to `200`. If set to `0`, the corresponding container will be skipped. You must set at least this setting or `--number-of-employees` to a positive integer value.* |
+| **`--number-of-employees`** | Number of product items to generate | *This setting defaults to `1000`. If set to `0`, the corresponding container will be skipped. You must set at least this setting or `--number-of-products` to a positive integer value.* |
+| **`--disable-hierarchical-partition-keys`** | Disables the creation of hierarchical partition keys | *This setting is useful for working in environments, like the emulator, where hierarchical partition keys are not supported.* |
+| **`--help` (`-h`)** | Renders help information and examples. | |
+| **`--version` (`-v`)** | Renders version information. | |
 
 ## Related
 
-- [``CosmicWorks.Data`` fictituous data library](https://www.nuget.org/packages/cosmicworks.data)
-- [``CosmicWorks.Generator`` data seeding library](https://www.nuget.org/packages/cosmicworks.generator)
-- [``CosmicWorks.Models`` model library](https://www.nuget.org/packages/cosmicworks.models)
+- [`CosmicWorks.Data` fictituous data library](https://www.nuget.org/packages/cosmicworks.data)
+- [`CosmicWorks.Generator` data seeding library](https://www.nuget.org/packages/cosmicworks.generator)
+- [`CosmicWorks.Models` model library](https://www.nuget.org/packages/cosmicworks.models)

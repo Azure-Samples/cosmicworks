@@ -1,4 +1,4 @@
-# ``CosmicWorks.Data`` fictituous data library
+# `CosmicWorks.Data` fictituous data library
 
 CosmicWorks is an open source set of tools and libraries to generate data quickly for your proof of concept or sample applications.
 
@@ -34,6 +34,6 @@ IReadOnlyList<Employee> employees = await new EmployeesDataSource().GetItemsAsyn
 
 ## Related
 
-- [``CosmicWorks`` data generation CLI tool](https://www.nuget.org/packages/cosmicworks)
-- [``CosmicWorks.Generator`` data seeding library](https://www.nuget.org/packages/cosmicworks.generator)
-- [``CosmicWorks.Models`` model library](https://www.nuget.org/packages/cosmicworks.models)
+- [`CosmicWorks` data generation CLI tool](https://www.nuget.org/packages/cosmicworks)
+- [`CosmicWorks.Generator` data seeding library](https://www.nuget.org/packages/cosmicworks.generator)
+- [`CosmicWorks.Models` model library](https://www.nuget.org/packages/cosmicworks.models)

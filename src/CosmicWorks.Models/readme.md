@@ -1,4 +1,4 @@
-# ``CosmicWorks.Models`` models library
+# `CosmicWorks.Models` models library
 
 CosmicWorks is an open source set of tools and libraries to generate data quickly for your proof of concept or sample applications.
 
@@ -67,6 +67,6 @@ classDiagram
 
 ## Related
 
-- [``CosmicWorks`` data generation CLI tool](https://www.nuget.org/packages/cosmicworks)
-- [``CosmicWorks.Data`` fictituous data library](https://www.nuget.org/packages/cosmicworks.data)
-- [``CosmicWorks.Generator`` data seeding library](https://www.nuget.org/packages/cosmicworks.generator)
+- [`CosmicWorks` data generation CLI tool](https://www.nuget.org/packages/cosmicworks)
+- [`CosmicWorks.Data` fictituous data library](https://www.nuget.org/packages/cosmicworks.data)
+- [`CosmicWorks.Generator` data seeding library](https://www.nuget.org/packages/cosmicworks.generator)

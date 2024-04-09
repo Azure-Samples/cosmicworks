@@ -97,7 +97,8 @@ public sealed class GenerateDataCommand : AsyncCommand<GenerateDataSettings>
                 databaseName: databaseName,
                 containerName: containerName,
                 count: settings.NumberOfEmployees,
-                (output) => ansiConsole.MarkupLine($"[green][bold][[SEED]][/]\t{output}[/]")
+                disableHierarchicalPartitionKeys: settings.DisableHierarchicalPartitionKeys ?? false,
+                onItemCreate: (output) => ansiConsole.MarkupLine($"[green][bold][[SEED]][/]\t{output}[/]")
             );
         }
 
@@ -125,7 +126,8 @@ public sealed class GenerateDataCommand : AsyncCommand<GenerateDataSettings>
                 databaseName: databaseName,
                 containerName: containerName,
                 count: settings.NumberOfProducts,
-                (output) => ansiConsole.MarkupLine($"[green][bold][[SEED]][/]\t{output}[/]")
+                disableHierarchicalPartitionKeys: settings.DisableHierarchicalPartitionKeys ?? false,
+                onItemCreate: (output) => ansiConsole.MarkupLine($"[green][bold][[SEED]][/]\t{output}[/]")
             );
         }
 

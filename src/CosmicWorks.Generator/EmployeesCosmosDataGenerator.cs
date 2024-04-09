@@ -17,7 +17,7 @@ public class EmployeesCosmosDataGenerator : ICosmosDataGenerator<Employee>
         _dataSource = dataSource;
     }
 
-    public async Task GenerateAsync(string connectionString, string databaseName, string containerName, int count, Action<string> onItemCreate)
+    public async Task GenerateAsync(string connectionString, string databaseName, string containerName, int count, bool disableHierarchicalPartitionKeys, Action<string> onItemCreate)
     {
         var seedItems = _dataSource.GetItems(count);
 
@@ -44,13 +44,15 @@ public class EmployeesCosmosDataGenerator : ICosmosDataGenerator<Employee>
             }
         );
 
-        ContainerProperties containerProperties = new(
+        ContainerProperties containerProperties = disableHierarchicalPartitionKeys ?
+            new ContainerProperties(
+                id: containerName,
+                partitionKeyPath: "/company"
+            ) : new ContainerProperties(
                 id: containerName,
                 partitionKeyPaths: new List<string> { "/company", "/department", "/territory" }
-        )
-        {
-            IndexingPolicy = indexingPolicy
-        };
+            );
+        containerProperties.IndexingPolicy = indexingPolicy;
 
         await _cosmosContext.SeedDataAsync<Employee>(
             connectionString,

@@ -17,7 +17,7 @@ public class ProductsCosmosDataGenerator : ICosmosDataGenerator<Product>
         _dataSource = dataSource;
     }
 
-    public async Task GenerateAsync(string connectionString, string databaseName, string containerName, int count, Action<string> onItemCreate)
+    public async Task GenerateAsync(string connectionString, string databaseName, string containerName, int count, bool disableHierarchicalPartitionKeys, Action<string> onItemCreate)
     {
         var seedItems = _dataSource.GetItems(count);
 
@@ -36,13 +36,15 @@ public class ProductsCosmosDataGenerator : ICosmosDataGenerator<Product>
             }
         );
 
-        ContainerProperties containerProperties = new(
+        ContainerProperties containerProperties = disableHierarchicalPartitionKeys ?
+            new ContainerProperties(
+                id: containerName,
+                partitionKeyPath: "/category/name"
+            ) : new ContainerProperties(
                 id: containerName,
                 partitionKeyPaths: new List<string> { "/category/name", "/category/subCategory/name" }
-        )
-        {
-            IndexingPolicy = indexingPolicy
-        };
+            );
+        containerProperties.IndexingPolicy = indexingPolicy;
 
         await _cosmosContext.SeedDataAsync<Product>(
             connectionString,

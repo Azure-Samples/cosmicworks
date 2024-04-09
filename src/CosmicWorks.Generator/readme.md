@@ -1,10 +1,10 @@
-# ``CosmicWorks.Generator`` data seeding library
+# `CosmicWorks.Generator` data seeding library
 
 CosmicWorks is an open source set of tools and libraries to generate data quickly for your proof of concept or sample applications.
 
 ## Overview
 
-Populates an Azure Cosmos DB for NoSQL container with fictiuous data generated using ``CosmicWorks.Data``.
+Populates an Azure Cosmos DB for NoSQL container with fictiuous data generated using `CosmicWorks.Data`.
 
 > 💡 The **CosmicWorks** sample data is partially derived from [AdventureWorksLT](https://github.com/microsoft/sql-server-samples/tree/master/samples/databases/adventure-works).
 
@@ -24,6 +24,7 @@ await new EmployeesCosmosDataGenerator(
     databaseName: "cosmicworks",
     containerName: "employees",
     count: 200,
+    disableHierarchicalPartitionKeys: false
     onItemCreate: (result) => Console.WriteLine($"[NEW PRODUCT]\t{result}")
 );
 
@@ -36,6 +37,7 @@ await new ProductsCosmosDataGenerator(
     databaseName: "cosmicworks",
     containerName: "products",
     count: 1000,
+    disableHierarchicalPartitionKeys: false
     onItemCreate: (result) => Console.WriteLine($"[NEW EMPLOYEE]\t{result}")
 );
 ```
@@ -44,8 +46,8 @@ await new ProductsCosmosDataGenerator(
 
 | | Description |
 | --- | --- |
-| **Employees** | Creates a container with fictiuous employee items and hierarchical partitoining based on ``/company``, ``/department``, and then ``/territory``.
-| **Products** | Creates a container with fictiuous product items and hierarchical partitoining based on ``/category.name`` and ``/category.subCategory.name``.
+| **Employees** | Creates a container with fictiuous employee items and hierarchical partitoining based on `/company`, `/department`, and then `/territory`.
+| **Products** | Creates a container with fictiuous product items and hierarchical partitoining based on `/category.name` and `/category.subCategory.name`.
 
 ## Sample data
 
@@ -101,6 +103,6 @@ Here's samples of the JSON data created using this tool with system-properties o
 
 ## Related
 
-- [``CosmicWorks`` data generation CLI tool](https://www.nuget.org/packages/cosmicworks)
-- [``CosmicWorks.Data`` fictituous data library](https://www.nuget.org/packages/cosmicworks.data)
-- [``CosmicWorks.Models`` model library](https://www.nuget.org/packages/cosmicworks.models)
+- [`CosmicWorks` data generation CLI tool](https://www.nuget.org/packages/cosmicworks)
+- [`CosmicWorks.Data` fictituous data library](https://www.nuget.org/packages/cosmicworks.data)
+- [`CosmicWorks.Models` model library](https://www.nuget.org/packages/cosmicworks.models)

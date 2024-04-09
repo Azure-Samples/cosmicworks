@@ -3,8 +3,9 @@
     <OutputType>Exe</OutputType>
     <AssemblyName>cosmicworks</AssemblyName>
     <RootNamespace>CosmicWorks.Tool</RootNamespace>
-    <TargetFramework>net7.0</TargetFramework>
-    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+    <TargetFramework>net8.0</TargetFramework>
+    <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

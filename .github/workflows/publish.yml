@@ -13,13 +13,13 @@ jobs:
   push-to-nuget:
     name: Push to NuGet
     runs-on: ubuntu-latest
-    container: mcr.microsoft.com/dotnet/sdk:7.0
+    container: mcr.microsoft.com/dotnet/sdk:8.0
     defaults:
       run:
         working-directory: ./src
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Package NuGet stable models
         if: ${{ inputs.versionSuffix == '' }}
         run: dotnet pack CosmicWorks.Models/CosmicWorks.Models.csproj --output out/ --include-symbols /p:VersionPrefix="${{ inputs.versionPrefix }}"

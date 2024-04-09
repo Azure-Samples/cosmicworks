@@ -35,7 +35,7 @@ public sealed class GenerateDataSettings : CommandSettings
     public bool? DisableFormatting { get; init; } = false;
 
     [Description("Disables hierarchical partition keys and uses only the first partition key value.")]
-    [CommandOption("--disable-hierarchical-partition-keys", IsHidden = true)]
+    [CommandOption("--disable-hierarchical-partition-keys")]
     public bool? DisableHierarchicalPartitionKeys { get; init; } = false;
 
     public override ValidationResult Validate()

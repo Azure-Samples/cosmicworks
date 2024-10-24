@@ -1,0 +1,41 @@
+name: CodeQL
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: '30 4 * * 2'
+jobs:
+  analyze:
+    if: github.repository == 'azure-samples/cosmos-db-nosql-dotnet-quickstart'
+    name: Analyze (csharp)
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      packages: read
+      actions: read
+      contents: read
+    strategy:
+      fail-fast: false
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: csharp
+        build-mode: manual
+    - name: Setup .NET 9
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0
+    - name: Build and validate project
+      working-directory: ./src
+      run: |
+        dotnet format --verify-no-changes
+        dotnet build
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+      with:
+        category: "/language:csharp"

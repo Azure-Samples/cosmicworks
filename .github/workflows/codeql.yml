@@ -8,7 +8,6 @@ on:
     - cron: '30 4 * * 2'
 jobs:
   analyze:
-    if: github.repository == 'azure-samples/cosmos-db-nosql-dotnet-quickstart'
     name: Analyze (csharp)
     runs-on: ubuntu-latest
     permissions:

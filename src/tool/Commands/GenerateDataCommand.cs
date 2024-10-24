@@ -1,12 +1,12 @@
-using CosmicWorks.Models;
-using CosmicWorks.Generator;
-using CosmicWorks.Tool.Settings;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Settings;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
-namespace CosmicWorks.Tool.Commands;
+namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Commands;
 
 public sealed class GenerateDataCommand : AsyncCommand<GenerateDataSettings>
 {

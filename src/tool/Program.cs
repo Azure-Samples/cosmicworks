@@ -1,8 +1,8 @@
-﻿using CosmicWorks.Data;
-using CosmicWorks.Models;
-using CosmicWorks.Generator;
-using CosmicWorks.Generator.DataSource;
-using CosmicWorks.Tool.Commands;
+﻿using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.DataSource;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Commands;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Spectre.Console.Cli;

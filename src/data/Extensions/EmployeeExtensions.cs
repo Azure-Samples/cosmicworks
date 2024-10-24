@@ -1,6 +1,6 @@
-using CosmicWorks.Models;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
 
-namespace CosmicWorks.Data.Extensions;
+namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.Extensions;
 
 internal static class EmployeeExtensions
 {

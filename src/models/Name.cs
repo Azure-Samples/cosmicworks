@@ -1,4 +1,4 @@
-namespace CosmicWorks.Models;
+namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
 
 public sealed record Name(
     string First,

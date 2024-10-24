@@ -1,10 +1,10 @@
-﻿using CosmicWorks.Data;
-using CosmicWorks.Models;
-using CosmicWorks.Generator.DataSource;
+﻿using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.DataSource;
 using Microsoft.Azure.Cosmos;
 using System.Collections.ObjectModel;
 
-namespace CosmicWorks.Generator;
+namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator;
 
 public class ProductsCosmosDataGenerator : ICosmosDataGenerator<Product>
 {

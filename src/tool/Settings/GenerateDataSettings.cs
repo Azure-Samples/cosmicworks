@@ -2,7 +2,7 @@ using Spectre.Console;
 using Spectre.Console.Cli;
 using System.ComponentModel;
 
-namespace CosmicWorks.Tool.Settings;
+namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Settings;
 
 public sealed class GenerateDataSettings : CommandSettings
 {

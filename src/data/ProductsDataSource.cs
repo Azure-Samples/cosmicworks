@@ -1,7 +1,7 @@
-using CosmicWorks.Data.Extensions;
-using CosmicWorks.Models;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.Extensions;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
 
-namespace CosmicWorks.Data;
+namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
 
 public sealed class ProductsDataSource : IDataSource<Product>
 {

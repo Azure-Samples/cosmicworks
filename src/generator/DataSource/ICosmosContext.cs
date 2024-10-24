@@ -1,6 +1,6 @@
 using Microsoft.Azure.Cosmos;
 
-namespace CosmicWorks.Generator.DataSource;
+namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.DataSource;
 
 public interface ICosmosContext
 {

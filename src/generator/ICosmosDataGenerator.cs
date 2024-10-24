@@ -1,4 +1,4 @@
-namespace CosmicWorks.Generator;
+namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator;
 
 public interface ICosmosDataGenerator<T>
 {

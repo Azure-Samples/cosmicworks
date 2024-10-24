@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <AssemblyName>cosmicworks</AssemblyName>
-    <RootNamespace>CosmicWorks.Tool</RootNamespace>
+    <RootNamespace>Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool</RootNamespace>
     <TargetFramework>net9.0</TargetFramework>
     <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>

@@ -1,7 +1,7 @@
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Fluent;
 
-namespace CosmicWorks.Generator.DataSource;
+namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.DataSource;
 
 public sealed class CosmosContext : ICosmosContext
 {

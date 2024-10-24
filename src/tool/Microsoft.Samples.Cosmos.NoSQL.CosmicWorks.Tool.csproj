@@ -35,11 +35,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="readme.md" Pack="true" PackagePath="\" />
-    <None Include="..\..\LICENSE.md" Pack="true" PackagePath="\" />
-    <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
+    <None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
+    <None Include="..\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CosmicWorks.Generator\CosmicWorks.Generator.csproj" />
-    <ProjectReference Include="..\CosmicWorks.Models\CosmicWorks.Models.csproj" />
+    <ProjectReference Include="..\generator\Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.csproj" />
+    <ProjectReference Include="..\models\Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models.csproj" />
   </ItemGroup>
 </Project>

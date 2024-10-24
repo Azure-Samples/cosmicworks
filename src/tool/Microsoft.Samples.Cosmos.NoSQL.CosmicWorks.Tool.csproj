@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>cosmicworks</AssemblyName>
+    <RootNamespace>Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool</RootNamespace>
+    <TargetFramework>net9.0</TargetFramework>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>cosmicworks</ToolCommandName>
+    <PackageOutputPath>./pkg</PackageOutputPath>
+    <PackageId>CosmicWorks</PackageId>
+    <Authors>Microsoft</Authors>
+    <Company>Microsoft</Company>
+    <PackageTags>Azure;Cosmos DB;Cosmos;NoSQL;DocumentDb;Tool;CLI;CosmosDB</PackageTags>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <Description>
+      Command-line tool to generate fictiuous data and populates an Azure Cosmos DB for NoSQL account with the data.
+    </Description>
+    <ProjectUrl>https://github.com/azure-samples/cosmicworks/tree/main/readme.md</ProjectUrl>
+    <RepositoryUrl>https://github.com/azure-samples/cosmicworks</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageIcon>icon.png</PackageIcon>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.1" />
+    <PackageReference Include="Spectre.Console" Version="0.49.1" />
+    <PackageReference Include="Spectre.Console.Cli" Version="0.49.1" />
+    <PackageReference Include="Spectre.Console.Registrars.Microsoft-Di" Version="0.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="readme.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
+    <None Include="..\icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\generator\Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.csproj" />
+    <ProjectReference Include="..\models\Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,18 +1,19 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator;
 
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.DataSource;
-using Microsoft.Azure.Cosmos;
 using System.Collections.ObjectModel;
+
+using Microsoft.Azure.Cosmos;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
 using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.BuilderFactory;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.DataSource;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
 
 /// <summary>
 /// A data generator for Azure Cosmos DB for NoSQL that generates items of type <see cref="Employee"/>.
 /// </summary>
 public class EmployeesCosmosDataGenerator(
-    ICosmosContext cosmosContext, 
+    ICosmosContext cosmosContext,
     IDataSource<Employee> dataSource) : ICosmosDataGenerator<Employee>
 {
     /// <inheritdoc/>

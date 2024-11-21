@@ -1,10 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Settings;
 
+using System.ComponentModel;
+
 using Spectre.Console;
 using Spectre.Console.Cli;
-
-using System.ComponentModel;
 
 /// <summary>
 /// Settings for generating data in the CosmicWorks tool.

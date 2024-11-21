@@ -20,6 +20,12 @@ dotnet tool install --global cosmicworks
     cosmicworks --emulator
     ```
 
+- Generate a subset of data.
+
+    ```bash
+    cosmicworks --emulator --number-of-products 0 --number-of-employees 50
+    ```
+
 - Generate all data in a live [Azure Cosmos DB for NoSQL](https://learn.microsoft.com/azure/cosmos-db/nosql) account using a connection string.
 
     ```bash
@@ -32,11 +38,8 @@ dotnet tool install --global cosmicworks
     cosmicworks --endpoint "<API_FOR_NOSQL_ENDPOINT>" --role-based-access-control
     ```
 
-- Generate a subset of data.
-
-    ```bash
-    cosmicworks --emulator --number-of-products 0 --number-of-employees 50
-    ```
+> [!IMPORTANT]
+> If you enable role-based access control, the database and container resources are **NOT** created on your behalf.
 
 ## Arguments
 

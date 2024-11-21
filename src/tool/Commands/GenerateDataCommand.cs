@@ -52,7 +52,7 @@ public sealed class GenerateDataCommand(
         {
             ansiConsole.Write(
                 new Panel(settings.HideCredentials is false ? $"[teal]{credential}[/]" : $"[teal dim]{new String('*', credential.Length)}[/]")
-                    .Header("[green]Connection string[/]")
+                    .Header("[green]Credential[/]")
                     .BorderColor(Color.White)
                     .RoundedBorder()
                     .Expand()

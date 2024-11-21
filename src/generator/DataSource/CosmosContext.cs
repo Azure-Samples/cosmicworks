@@ -28,12 +28,20 @@ public sealed class CosmosContext(
 
         AccountProperties accountProperties = await client.ReadAccountAsync();
 
-        Database database = await client.CreateDatabaseIfNotExistsAsync(
+
+
+        Database database = factoryOptions.UseRoleBasedAccessControl ?
+        client.GetDatabase(
+            id: databaseName
+        ) : await client.CreateDatabaseIfNotExistsAsync(
             id: databaseName,
             throughput: _databaseThroughput
         );
 
-        Container container = await database.CreateContainerIfNotExistsAsync(
+        Container container = factoryOptions.UseRoleBasedAccessControl ?
+        database.GetContainer(
+            id: databaseName
+        ) : await database.CreateContainerIfNotExistsAsync(
             containerProperties: containerProperties
         );
 

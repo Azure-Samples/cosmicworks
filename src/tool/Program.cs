@@ -32,7 +32,18 @@ app.Configure(config =>
     config.AddExample(new[] { "--emulator" });
     config.AddExample(new[] { "--emulator", "--number-of-employees", "0" });
     config.AddExample(new[] { "--emulator", "--number-of-products", "0" });
+    config.AddExample(new[] { "--emulator", "--number-of-employees", "1000" });
+    config.AddExample(new[] { "--emulator", "--number-of-products", "500" });
+    config.AddExample(new[] { "--emulator", "--number-of-employees", "200", "--number-of-products", "1000" });
+    config.AddExample(new[] { "--rbac", "--endpoint", "\"<API-NOSQL-ENDPOINT>\"" });
+    config.AddExample(new[] { "--rbac", "--endpoint", "\"<API-NOSQL-ENDPOINT>\"", "--number-of-employees", "0" });
+    config.AddExample(new[] { "--rbac", "--endpoint", "\"<API-NOSQL-ENDPOINT>\"", "--number-of-products", "0" });
+    config.AddExample(new[] { "--rbac", "--endpoint", "\"<API-NOSQL-ENDPOINT>\"", "--number-of-employees", "100" });
+    config.AddExample(new[] { "--rbac", "--endpoint", "\"<API-NOSQL-ENDPOINT>\"", "--number-of-products", "500" });
+    config.AddExample(new[] { "--rbac", "--endpoint", "\"<API-NOSQL-ENDPOINT>\"", "--number-of-employees", "200", "--number-of-products", "1000" });
     config.AddExample(new[] { "--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\"" });
+    config.AddExample(new[] { "--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\"", "--number-of-employees", "0" });
+    config.AddExample(new[] { "--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\"", "--number-of-products", "0" });
     config.AddExample(new[] { "--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\"", "--number-of-employees", "100" });
     config.AddExample(new[] { "--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\"", "--number-of-products", "500" });
     config.AddExample(new[] { "--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\"", "--number-of-employees", "200", "--number-of-products", "1000" });

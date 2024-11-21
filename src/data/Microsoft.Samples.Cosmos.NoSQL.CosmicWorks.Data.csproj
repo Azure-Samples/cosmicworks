@@ -19,6 +19,11 @@
     <ProjectUrl>https://github.com/azure-samples/cosmicworks/tree/main/src/CosmicWorks.Data/readme.md</ProjectUrl>
     <RepositoryUrl>https://github.com/azure-samples/cosmicworks</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AnalysisMode>Recommended</AnalysisMode>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
   </PropertyGroup>
   <ItemGroup>
     <None Include="readme.md" Pack="true" PackagePath="\" />

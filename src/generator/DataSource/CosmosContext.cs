@@ -47,7 +47,10 @@ public sealed class CosmosContext(
 
         if (database is not null && container is not null)
         {
-            await database.ReplaceThroughputAsync(4000);
+            if (!factoryOptions.UseRoleBasedAccessControl)
+            {
+                await database.ReplaceThroughputAsync(4000);
+            }
 
             List<Task> tasks = new(items.Count());
             foreach (var item in items)
@@ -66,7 +69,10 @@ public sealed class CosmosContext(
             }
             await Task.WhenAll(tasks);
 
-            await database.ReplaceThroughputAsync(400);
+            if (!factoryOptions.UseRoleBasedAccessControl)
+            {
+                await database.ReplaceThroughputAsync(4000);
+            }
         }
     }
 }

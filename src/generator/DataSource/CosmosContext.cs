@@ -40,7 +40,7 @@ public sealed class CosmosContext(
 
         Container container = factoryOptions.UseRoleBasedAccessControl ?
         database.GetContainer(
-            id: databaseName
+            id: containerProperties.Id
         ) : await database.CreateContainerIfNotExistsAsync(
             containerProperties: containerProperties
         );
@@ -57,11 +57,15 @@ public sealed class CosmosContext(
             {
                 tasks.Add(
                     container.UpsertItemAsync(item)
-                        .ContinueWith(r =>
+                        .ContinueWith(response =>
                             {
-                                if (r.IsCompletedSuccessfully)
+                                if (response.IsCompletedSuccessfully)
                                 {
-                                    onCreated($"{r.Result.Resource}");
+                                    onCreated($"{response.Result.Resource}");
+                                }
+                                else if (response.Exception is not null)
+                                {
+                                    throw response.Exception;
                                 }
                             }
                         )

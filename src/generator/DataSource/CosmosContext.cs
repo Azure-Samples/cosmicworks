@@ -1,15 +1,22 @@
-using Microsoft.Azure.Cosmos;
-using Microsoft.Azure.Cosmos.Fluent;
-
+// Copyright (c) Microsoft Corporation. All rights reserved.
 namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.DataSource;
 
-public sealed class CosmosContext : ICosmosContext
+using Microsoft.Azure.Cosmos;
+using Microsoft.Azure.Cosmos.Fluent;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.BuilderFactory;
+
+/// <inheritdoc/>
+public sealed class CosmosContext(
+    ICosmosClientBuilderFactory cosmosClientBuilderFactory) : ICosmosContext
 {
     private const int _databaseThroughput = 400;
 
-    public async Task SeedDataAsync<T>(string connectionString, string databaseName, ContainerProperties containerProperties, IEnumerable<T> items, Action<string> onCreated)
+    /// <inheritdoc/>
+    public async Task SeedDataAsync<T>(CosmosClientBuilderFactoryOptions factoryOptions, string databaseName, ContainerProperties containerProperties, IEnumerable<T> items, Action<string> onCreated)
     {
-        using CosmosClient client = new CosmosClientBuilder(connectionString)
+        CosmosClientBuilder clientBuilder = cosmosClientBuilderFactory.GetBuilder(factoryOptions);
+
+        using CosmosClient client = clientBuilder
             .WithSerializerOptions(new CosmosSerializationOptions()
             {
                 IgnoreNullValues = true,
@@ -21,18 +28,29 @@ public sealed class CosmosContext : ICosmosContext
 
         AccountProperties accountProperties = await client.ReadAccountAsync();
 
-        Database database = await client.CreateDatabaseIfNotExistsAsync(
+
+
+        Database database = factoryOptions.UseRoleBasedAccessControl ?
+        client.GetDatabase(
+            id: databaseName
+        ) : await client.CreateDatabaseIfNotExistsAsync(
             id: databaseName,
             throughput: _databaseThroughput
         );
 
-        Container container = await database.CreateContainerIfNotExistsAsync(
+        Container container = factoryOptions.UseRoleBasedAccessControl ?
+        database.GetContainer(
+            id: databaseName
+        ) : await database.CreateContainerIfNotExistsAsync(
             containerProperties: containerProperties
         );
 
         if (database is not null && container is not null)
         {
-            await database.ReplaceThroughputAsync(4000);
+            if (!factoryOptions.UseRoleBasedAccessControl)
+            {
+                await database.ReplaceThroughputAsync(4000);
+            }
 
             List<Task> tasks = new(items.Count());
             foreach (var item in items)
@@ -51,7 +69,10 @@ public sealed class CosmosContext : ICosmosContext
             }
             await Task.WhenAll(tasks);
 
-            await database.ReplaceThroughputAsync(400);
+            if (!factoryOptions.UseRoleBasedAccessControl)
+            {
+                await database.ReplaceThroughputAsync(4000);
+            }
         }
     }
 }

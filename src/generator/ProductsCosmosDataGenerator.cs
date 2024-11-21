@@ -1,25 +1,25 @@
-﻿using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.DataSource;
-using Microsoft.Azure.Cosmos;
-using System.Collections.ObjectModel;
-
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator;
 
-public class ProductsCosmosDataGenerator : ICosmosDataGenerator<Product>
+using System.Collections.ObjectModel;
+
+using Microsoft.Azure.Cosmos;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.BuilderFactory;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.DataSource;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
+
+/// <summary>
+/// A data generator for Azure Cosmos DB for NoSQL that generates items of type <see cref="Product"/>.
+/// </summary>
+public class ProductsCosmosDataGenerator(
+    ICosmosContext cosmosContext,
+    IDataSource<Product> dataSource) : ICosmosDataGenerator<Product>
 {
-    private readonly ICosmosContext _cosmosContext;
-    private readonly IDataSource<Product> _dataSource;
-
-    public ProductsCosmosDataGenerator(ICosmosContext cosmosContext, IDataSource<Product> dataSource)
+    /// <inheritdoc/>
+    public async Task GenerateAsync(CosmosClientBuilderFactoryOptions factoryOptions, string databaseName, string containerName, int count, bool disableHierarchicalPartitionKeys, Action<string> onItemCreate)
     {
-        _cosmosContext = cosmosContext;
-        _dataSource = dataSource;
-    }
-
-    public async Task GenerateAsync(string connectionString, string databaseName, string containerName, int count, bool disableHierarchicalPartitionKeys, Action<string> onItemCreate)
-    {
-        var seedItems = _dataSource.GetItems(count);
+        var seedItems = dataSource.GetItems(count);
 
         IndexingPolicy indexingPolicy = new()
         {
@@ -46,8 +46,8 @@ public class ProductsCosmosDataGenerator : ICosmosDataGenerator<Product>
             );
         containerProperties.IndexingPolicy = indexingPolicy;
 
-        await _cosmosContext.SeedDataAsync<Product>(
-            connectionString,
+        await cosmosContext.SeedDataAsync<Product>(
+            factoryOptions,
             databaseName,
             containerProperties,
             seedItems,

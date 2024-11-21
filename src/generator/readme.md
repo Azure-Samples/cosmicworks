@@ -11,16 +11,25 @@ Populates an Azure Cosmos DB for NoSQL container with fictiuous data generated u
 ## Usage
 
 ```csharp
-using CosmicWorks.Data;
-using CosmicWorks.Generator;
-using CosmicWorks.Generator.DataSource;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.DataSource;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.BuilderFactory;
+
+CosmosClientBuilderFactoryOptions options = new()
+{
+  UseEmulator = true,
+  UseRoleBasedAccessControl = false,
+  Endpoint = null,
+  ConnectionString = null
+};
 
 // Seed "employees" database
 await new EmployeesCosmosDataGenerator(
     cosmosContext: new CosmosContext(),
     dataSource: new EmployeesDataSource()
 ).GenerateAsync(
-    connectionString: "AccountEndpoint=https://localhost:8081/;AccountKey=C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==", 
+    factoryOptions: options, 
     databaseName: "cosmicworks",
     containerName: "employees",
     count: 200,
@@ -33,7 +42,7 @@ await new ProductsCosmosDataGenerator(
     cosmosContext: new CosmosContext(),
     dataSource: new ProductsDataSource()
 ).GenerateAsync(
-    connectionString: "AccountEndpoint=https://localhost:8081/;AccountKey=C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==", 
+    factoryOptions: options,
     databaseName: "cosmicworks",
     containerName: "products",
     count: 1000,

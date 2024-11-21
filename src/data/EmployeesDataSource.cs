@@ -1,10 +1,15 @@
-﻿using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.Extensions;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
-
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
 
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.Extensions;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
+
+/// <summary>
+/// A data source that generates items of type <see cref="Employee"/>.
+/// </summary>
 public sealed class EmployeesDataSource : IDataSource<Employee>
 {
+    /// <inheritdoc/>
     public IReadOnlyList<Employee> GetItems(int count = 234)
     {
         int generatedEmployeesCount = count switch

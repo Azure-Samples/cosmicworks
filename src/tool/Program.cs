@@ -1,13 +1,16 @@
-﻿using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.DataSource;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Commands;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.BuilderFactory;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.DataSource;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Commands;
+
 using Spectre.Console.Cli;
 
-var registrations = new ServiceCollection();
+ServiceCollection registrations = new();
 
 registrations.AddSingleton<ILoggerFactory, LoggerFactory>();
 registrations.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
@@ -16,8 +19,9 @@ registrations.AddSingleton<IDataSource<Product>, ProductsDataSource>();
 registrations.AddSingleton<IDataSource<Employee>, EmployeesDataSource>();
 registrations.AddSingleton<ICosmosDataGenerator<Product>, ProductsCosmosDataGenerator>();
 registrations.AddSingleton<ICosmosDataGenerator<Employee>, EmployeesCosmosDataGenerator>();
+registrations.AddSingleton<ICosmosClientBuilderFactory, CosmosClientBuilderFactory>();
 
-var registrar = new ServiceCollectionRegistrar(registrations);
+ServiceCollectionRegistrar registrar = new(registrations);
 
 CommandApp app = new(registrar);
 
@@ -27,15 +31,26 @@ app.SetDefaultCommand<GenerateDataCommand>()
 app.Configure(config =>
 {
     config.SetApplicationName("cosmicworks");
-    config.AddExample(new[] { "--help" });
-    config.AddExample(new[] { "--version" });
-    config.AddExample(new[] { "--emulator" });
-    config.AddExample(new[] { "--emulator", "--number-of-employees", "0" });
-    config.AddExample(new[] { "--emulator", "--number-of-products", "0" });
-    config.AddExample(new[] { "--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\"" });
-    config.AddExample(new[] { "--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\"", "--number-of-employees", "100" });
-    config.AddExample(new[] { "--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\"", "--number-of-products", "500" });
-    config.AddExample(new[] { "--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\"", "--number-of-employees", "200", "--number-of-products", "1000" });
+    config.AddExample(["--help"]);
+    config.AddExample(["--version"]);
+    config.AddExample(["--emulator"]);
+    config.AddExample(["--emulator", "--number-of-employees", "0"]);
+    config.AddExample(["--emulator", "--number-of-products", "0"]);
+    config.AddExample(["--emulator", "--number-of-employees", "1000"]);
+    config.AddExample(["--emulator", "--number-of-products", "500"]);
+    config.AddExample(["--emulator", "--number-of-employees", "200", "--number-of-products", "1000"]);
+    config.AddExample(["--rbac", "--endpoint", "\"<API-NOSQL-ENDPOINT>\""]);
+    config.AddExample(["--rbac", "--endpoint", "\"<API-NOSQL-ENDPOINT>\"", "--number-of-employees", "0"]);
+    config.AddExample(["--rbac", "--endpoint", "\"<API-NOSQL-ENDPOINT>\"", "--number-of-products", "0"]);
+    config.AddExample(["--rbac", "--endpoint", "\"<API-NOSQL-ENDPOINT>\"", "--number-of-employees", "100"]);
+    config.AddExample(["--rbac", "--endpoint", "\"<API-NOSQL-ENDPOINT>\"", "--number-of-products", "500"]);
+    config.AddExample(["--rbac", "--endpoint", "\"<API-NOSQL-ENDPOINT>\"", "--number-of-employees", "200", "--number-of-products", "1000"]);
+    config.AddExample(["--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\""]);
+    config.AddExample(["--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\"", "--number-of-employees", "0"]);
+    config.AddExample(["--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\"", "--number-of-products", "0"]);
+    config.AddExample(["--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\"", "--number-of-employees", "100"]);
+    config.AddExample(["--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\"", "--number-of-products", "500"]);
+    config.AddExample(["--connection-string", "\"<API-NOSQL-CONNECTION-STRING>\"", "--number-of-employees", "200", "--number-of-products", "1000"]);
 });
 
 return await app.RunAsync(args);

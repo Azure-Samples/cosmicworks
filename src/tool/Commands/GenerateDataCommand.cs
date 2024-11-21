@@ -1,24 +1,33 @@
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Settings;
-using Spectre.Console;
-using Spectre.Console.Cli;
+// Copyright (c) Microsoft Corporation. All rights reserved.
+namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Commands;
+
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
-namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Commands;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.BuilderFactory;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Settings;
 
-public sealed class GenerateDataCommand : AsyncCommand<GenerateDataSettings>
+using Spectre.Console;
+using Spectre.Console.Cli;
+
+/// <summary>
+/// A command to generate data.
+/// </summary>
+/// <param name="productGenerator">
+/// The generator for products.
+/// </param>
+/// <param name="employeeGenerator">
+/// The generator for employees.
+/// </param>
+public sealed class GenerateDataCommand(
+    ICosmosDataGenerator<Product> productGenerator,
+    ICosmosDataGenerator<Employee> employeeGenerator) : AsyncCommand<GenerateDataSettings>
 {
-    private readonly ICosmosDataGenerator<Product> _productGenerator;
-    private readonly ICosmosDataGenerator<Employee> _employeeGenerator;
-
-    public GenerateDataCommand(ICosmosDataGenerator<Product> productGenerator, ICosmosDataGenerator<Employee> employeeGenerator)
-    {
-        _productGenerator = productGenerator;
-        _employeeGenerator = employeeGenerator;
-    }
-
+    /// <summary>
+    /// Executes the command asynchronously.
+    /// </summary>
     public override async Task<int> ExecuteAsync([NotNull] CommandContext context, [NotNull] GenerateDataSettings settings)
     {
         AnsiConsoleSettings consoleSettings = new()
@@ -37,45 +46,36 @@ public sealed class GenerateDataCommand : AsyncCommand<GenerateDataSettings>
 
         ansiConsole.Write(new Rule("[yellow]Parsing connection string[/]").LeftJustified().RuleStyle("olive"));
 
-        string? connectionString = settings.ConnectionString;
-        if (settings.Emulator)
+        string? credential = settings.Emulator ? "<emulator>" : settings.RoleBasedAccessControl ? settings.Endpoint : settings.ConnectionString;
+
+        if (credential is not null)
         {
-            connectionString = "AccountEndpoint=https://localhost:8081/;AccountKey=C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==";
-        }
-        else
-        {
-            connectionString ??= ansiConsole.Prompt(
-                new TextPrompt<string>("What is your [teal]connection string[/]?")
-                    .PromptStyle("teal")
-                    .ValidationErrorMessage("[bold red]That's not a valid connection string[/].")
-                    .Validate(c =>
-                    {
-                        return String.IsNullOrWhiteSpace(c) switch
-                        {
-                            true => ValidationResult.Error("[bold red]You must provide a connection string[/]"),
-                            false => ValidationResult.Success(),
-                        };
-                    })
+            ansiConsole.Write(
+                new Panel(settings.HideCredentials is false ? $"[teal]{credential}[/]" : $"[teal dim]{new String('*', credential.Length)}[/]")
+                    .Header("[green]Credential[/]")
+                    .BorderColor(Color.White)
+                    .RoundedBorder()
+                    .Expand()
             );
         }
-
-        ansiConsole.Write(
-            new Panel(settings.HideCredentials is false ? $"[teal]{connectionString}[/]" : $"[teal dim]{new String('*', connectionString.Length)}[/]")
-                .Header("[green]Connection string[/]")
-                .BorderColor(Color.White)
-                .RoundedBorder()
-                .Expand()
-        );
 
         ansiConsole.Write(new Rule("[yellow]Populating data[/]").LeftJustified().RuleStyle("olive"));
 
         string databaseName = "cosmicworks";
 
+        CosmosClientBuilderFactoryOptions factoryOptions = new()
+        {
+            ConnectionString = settings.ConnectionString,
+            Endpoint = settings.Endpoint,
+            UseEmulator = settings.Emulator,
+            UseRoleBasedAccessControl = settings.RoleBasedAccessControl,
+        };
+
         if (settings.NumberOfEmployees > 0)
         {
             string containerName = "employees";
 
-            var grid = new Grid();
+            Grid grid = new();
             grid.AddColumn();
             grid.AddColumn();
             grid.AddRow("[green bold]Database[/]", $"[teal]{databaseName}[/]");
@@ -92,8 +92,8 @@ public sealed class GenerateDataCommand : AsyncCommand<GenerateDataSettings>
 
             ansiConsole.MarkupLine("[grey dim italic][bold]Warning[/]: Items are generated in parallel and the order of output logs may differ between runs.[/]");
 
-            await _employeeGenerator.GenerateAsync(
-                connectionString: connectionString,
+            await employeeGenerator.GenerateAsync(
+                factoryOptions: factoryOptions,
                 databaseName: databaseName,
                 containerName: containerName,
                 count: settings.NumberOfEmployees,
@@ -106,7 +106,7 @@ public sealed class GenerateDataCommand : AsyncCommand<GenerateDataSettings>
         {
             string containerName = "products";
 
-            var grid = new Grid();
+            Grid grid = new();
             grid.AddColumn();
             grid.AddColumn();
             grid.AddRow("[green bold]Database[/]", $"[teal]{databaseName}[/]");
@@ -121,8 +121,8 @@ public sealed class GenerateDataCommand : AsyncCommand<GenerateDataSettings>
                     .Expand()
             );
 
-            await _productGenerator.GenerateAsync(
-                connectionString: connectionString,
+            await productGenerator.GenerateAsync(
+                factoryOptions: factoryOptions,
                 databaseName: databaseName,
                 containerName: containerName,
                 count: settings.NumberOfProducts,

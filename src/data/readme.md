@@ -11,8 +11,8 @@ This library generates fictious data used in the **CosmicWorks** sample dataset.
 ## Usage
 
 ```csharp
-using CosmicWorks.Data;
-using CosmicWorks.Data.Models;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.Models;
 
 // Generate employees
 IReadOnlyList<Product> products = await new ProductsDataSource().GetItemsAsync(

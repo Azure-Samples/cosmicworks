@@ -1,51 +1,90 @@
-using Spectre.Console;
-using Spectre.Console.Cli;
-using System.ComponentModel;
-
+// Copyright (c) Microsoft Corporation. All rights reserved.
 namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Settings;
 
+using Spectre.Console;
+using Spectre.Console.Cli;
+
+using System.ComponentModel;
+
+/// <summary>
+/// Settings for generating data in the CosmicWorks tool.
+/// </summary>
 public sealed class GenerateDataSettings : CommandSettings
 {
+    /// <summary>
+    /// The connection string to the Azure Cosmos DB for NoSQL account.
+    /// </summary>
     [Description("The connection string to the Azure Cosmos DB for NoSQL account.")]
     [CommandOption("-c|--connection-string <CONNECTION_STRING>")]
     public string? ConnectionString { get; init; }
 
+    /// <summary>
+    /// Use the Azure Cosmos DB Emulator.
+    /// </summary>
     [Description("Use the Azure Cosmos DB Emulator.")]
     [CommandOption("-e|--emulator <EMULATOR>")]
     public bool Emulator { get; init; } = false;
 
+    /// <summary>
+    /// The number of products to generate.
+    /// </summary>
     [Description("The number of products to generate.")]
     [CommandOption("--number-of-products <NUMBER_OF_PRODUCTS>")]
     public int NumberOfProducts { get; init; } = 1759;
 
+    /// <summary>
+    /// The number of employees to generate.
+    /// </summary>
     [Description("The number of employees to generate.")]
     [CommandOption("--number-of-employees <NUMBER_OF_EMPLOYEES>")]
     public int NumberOfEmployees { get; init; } = 234;
 
+    /// <summary>
+    /// Gets the version of the tool.
+    /// </summary>
     [Description("Gets the version of the tool.")]
     [CommandOption("-v|--version <VERSION>")]
     public bool RenderVersion { get; init; } = false;
 
+    /// <summary>
+    /// Hides the credentials.
+    /// </summary>
     [Description("Hides the credentials.")]
     [CommandOption("--hide-credentials <HIDE_CREDENTIALS>", IsHidden = true)]
     public bool? HideCredentials { get; init; } = false;
 
+    /// <summary>
+    /// Disables ANSI and color formatting for console output.
+    /// </summary>
     [Description("Disables ANSI and color formatting for console output.")]
     [CommandOption("--disable-formatting <DISABLE_FORMATTING>", IsHidden = true)]
     public bool? DisableFormatting { get; init; } = false;
 
+    /// <summary>
+    /// Disables hierarchical partition keys and uses only the first partition key value.
+    /// </summary>
     [Description("Disables hierarchical partition keys and uses only the first partition key value.")]
     [CommandOption("--disable-hierarchical-partition-keys")]
     public bool? DisableHierarchicalPartitionKeys { get; init; } = false;
 
+    /// <summary>
+    /// Enables role-based access control.
+    /// </summary>
     [Description("Enables role-based access control.")]
     [CommandOption("--role-based-access-control|--rbac|-r <ROLE_BASED_ACCESS_CONTROL>")]
     public bool RoleBasedAccessControl { get; init; } = false;
 
+    /// <summary>
+    /// The endpoint to the Azure Cosmos DB for NoSQL account.
+    /// </summary>
     [Description("The endpoint to the Azure Cosmos DB for NoSQL account.")]
     [CommandOption("-n|--endpoint <ENDPOINT>")]
     public string? Endpoint { get; init; }
 
+    /// <summary>
+    /// Validates the settings.
+    /// </summary>
+    /// <returns>The validation result.</returns>
     public override ValidationResult Validate()
     {
         string? error = default;

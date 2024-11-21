@@ -3,3 +3,6 @@ __*
 
 # Visual Studio Code
 .vscode/
+
+# .NET tools
+.config/

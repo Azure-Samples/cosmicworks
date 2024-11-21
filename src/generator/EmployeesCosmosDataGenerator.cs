@@ -1,25 +1,24 @@
-﻿using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator;
+
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
 using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
 using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.DataSource;
 using Microsoft.Azure.Cosmos;
 using System.Collections.ObjectModel;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.BuilderFactory;
 
-namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator;
-
-public class EmployeesCosmosDataGenerator : ICosmosDataGenerator<Employee>
+/// <summary>
+/// A data generator for Azure Cosmos DB for NoSQL that generates items of type <see cref="Employee"/>.
+/// </summary>
+public class EmployeesCosmosDataGenerator(
+    ICosmosContext cosmosContext, 
+    IDataSource<Employee> dataSource) : ICosmosDataGenerator<Employee>
 {
-    private readonly ICosmosContext _cosmosContext;
-    private readonly IDataSource<Employee> _dataSource;
-
-    public EmployeesCosmosDataGenerator(ICosmosContext cosmosContext, IDataSource<Employee> dataSource)
+    /// <inheritdoc/>
+    public async Task GenerateAsync(CosmosClientBuilderFactoryOptions factoryOptions, string databaseName, string containerName, int count, bool disableHierarchicalPartitionKeys, Action<string> onItemCreate)
     {
-        _cosmosContext = cosmosContext;
-        _dataSource = dataSource;
-    }
-
-    public async Task GenerateAsync(string connectionString, string databaseName, string containerName, int count, bool disableHierarchicalPartitionKeys, Action<string> onItemCreate)
-    {
-        var seedItems = _dataSource.GetItems(count);
+        var seedItems = dataSource.GetItems(count);
 
         IndexingPolicy indexingPolicy = new()
         {
@@ -54,8 +53,8 @@ public class EmployeesCosmosDataGenerator : ICosmosDataGenerator<Employee>
             );
         containerProperties.IndexingPolicy = indexingPolicy;
 
-        await _cosmosContext.SeedDataAsync<Employee>(
-            connectionString,
+        await cosmosContext.SeedDataAsync<Employee>(
+            factoryOptions,
             databaseName,
             containerProperties,
             seedItems,

@@ -34,6 +34,7 @@ public class EmployeesDataSourceTests
         Assert.All(result, Assert.NotNull);
         Assert.Equal(100, result.Count);
     }
+
     [Fact]
     public void GetValidEmployeeTest()
     {

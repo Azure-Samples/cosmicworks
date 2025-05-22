@@ -23,8 +23,7 @@ internal static class EmployeeExtensions
                 Department: i.Department,
                 EmailAddress: $"{i.First.ToLowerInvariant()}@adventure-works.com",
                 PhoneNumber: $"425-555-{i.PhoneNumberSuffix}",
-                Territory: i.Region,
-                Type: "employee"
+                Territory: i.Region
             )
         );
 }

@@ -28,4 +28,14 @@ public class ProductsDataSourceTests
             source.GetItems(count: 1760);
         });
     }
+
+    [Fact]
+    public void ImplementsInterfaceTest()
+    {
+        // Arrange
+        ProductsDataSource source = new();
+
+        // Act & Assert
+        Assert.True(source is IDataSource<Product>);
+    }
 }

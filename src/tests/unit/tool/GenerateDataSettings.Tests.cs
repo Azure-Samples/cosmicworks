@@ -1,5 +1,5 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tests.Unit;
+namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Tests.Unit;
 
 public class GenerateDataSettingsTests
 {

@@ -28,4 +28,14 @@ public class EmployeesDataSourceTests
             source.GetItems(count: 235);
         });
     }
+
+    [Fact]
+    public void ImplementsInterfaceTest()
+    {
+        // Arrange
+        EmployeesDataSource source = new();
+
+        // Act & Assert
+        Assert.True(source is IDataSource<Employee>);
+    }
 }

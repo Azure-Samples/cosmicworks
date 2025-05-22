@@ -8,7 +8,7 @@ internal static class ProductExtensions
                 Id: i.Id,
                 Name: i.Name,
                 Description: i.Description,
-                Category:  i.CategoryName,
+                Category: i.CategoryName,
                 SubCategory: i.SubCategoryName,
                 SKU: i.ProductNumber,
                 Tags: [.. i.GetTags()],

@@ -3,6 +3,8 @@ namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.Models;
 
 internal class Entity<T> : IReadOnlyList<T>
 {
+    private const string root = "raw";
+
     private readonly List<T> items = [];
 
     private readonly IDeserializer deserializer = new DeserializerBuilder()
@@ -11,15 +13,17 @@ internal class Entity<T> : IReadOnlyList<T>
 
     public Entity(string fileName)
     {
-        string target = Path.Combine("raw", fileName);
+        string target = Path.Combine(root, fileName);
 
-        if (File.Exists(target))
+        if (!File.Exists(target))
         {
-            string yaml = File.ReadAllText(target);
-            IReadOnlyList<T> data = deserializer.Deserialize<T[]>(yaml);
-            items.Clear();
-            items.AddRange(data);
+            throw new FileNotFoundException($"The source data file {target} does not exist.");
         }
+
+        string yaml = File.ReadAllText(target);
+        IReadOnlyList<T> data = deserializer.Deserialize<T[]>(yaml);
+        items.Clear();
+        items.AddRange(data);
     }
 
     public T this[int index] => items[index];

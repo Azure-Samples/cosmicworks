@@ -1,25 +1,32 @@
-name: Publish to NuGet
+name: Continuous Deployment
 on: 
   workflow_dispatch:
     inputs:
       versionPrefix:
         description: 'Version prefix for the NuGet package'
         required: true
-        default: '2.0.0'
+        default: '3.0.0'
       versionSuffix:
         description: 'Version suffix for the NuGet package'
         required: false
+permissions:
+  contents: read
 jobs:
-  push-to-nuget:
-    name: Push to NuGet
+  continuous-deployment-nuget:
+    name: Deploy to NuGet
     runs-on: ubuntu-latest
-    container: mcr.microsoft.com/dotnet/sdk:9.0
     defaults:
       run:
         working-directory: ./src
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.x
+            9.x
+            10.x
       - name: Package NuGet stable models
         if: ${{ inputs.versionSuffix == '' }}
         run: dotnet pack models/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models.csproj --output out/ --include-symbols /p:VersionPrefix="${{ inputs.versionPrefix }}"

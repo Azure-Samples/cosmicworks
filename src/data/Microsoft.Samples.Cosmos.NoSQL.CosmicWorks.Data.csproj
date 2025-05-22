@@ -16,7 +16,7 @@
     <None Include="..\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(ProjectDir)**\*.yaml">
+    <None Include="Raw\**\*.yaml" Link="data\%(Filename)%(Extension)">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

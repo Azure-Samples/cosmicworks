@@ -3,7 +3,7 @@ namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.Models;
 
 internal class Entity<T> : IReadOnlyList<T>
 {
-    private const string root = "raw";
+    private const string root = "data";
 
     private readonly List<T> items = [];
 

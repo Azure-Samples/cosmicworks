@@ -3,9 +3,9 @@ namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.Extensions;
 
 internal static class EmployeeExtensions
 {
-    public static IEnumerable<Employee> ToEmployees(this IEnumerable<Raw.Person> items) =>
+    public static IEnumerable<Employee> ToEmployees(this IEnumerable<Person> items) =>
         items.Select(i => new Employee(
-                Id: $"{i.Id:00000000-0000-0000-0000-000000000000}",
+                Id: i.Id,
                 Name: new Name(
                     First: i.First,
                     Last: i.Last

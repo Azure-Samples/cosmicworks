@@ -16,7 +16,7 @@ public sealed class EmployeesDataSource : IDataSource<Employee>
             _ => count
         };
 
-        return [.. Raw.People.Get()
+        return [.. new People()
             .OrderBy(i => i.Id)
             .Take(generatedEmployeesCount)
             .ToEmployees()];

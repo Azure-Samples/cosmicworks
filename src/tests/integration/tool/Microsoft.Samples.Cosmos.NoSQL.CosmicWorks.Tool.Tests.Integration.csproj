@@ -16,6 +16,6 @@
     <Using Include="Xunit" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\tool\Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.csproj" />
+    <ProjectReference Include="..\..\..\data\Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.csproj" />
   </ItemGroup>
 </Project>

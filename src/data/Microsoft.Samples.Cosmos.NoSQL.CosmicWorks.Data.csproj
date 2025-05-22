@@ -8,11 +8,20 @@
     <ProjectUrl>https://github.com/azure-samples/cosmicworks/tree/main/src/data/readme.md</ProjectUrl>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="YamlDotNet" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="readme.md" Pack="true" PackagePath="\" />
     <None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
     <None Include="..\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Raw\**\*.yaml" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\models\Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.Tests.Unit" />
   </ItemGroup>
 </Project>

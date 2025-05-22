@@ -36,6 +36,6 @@
     <ProjectReference Include="..\models\Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <InternalsVisibleTo Include="Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tests.Unit" />
+    <InternalsVisibleTo Include="Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Tests.Unit" />
   </ItemGroup>
 </Project>

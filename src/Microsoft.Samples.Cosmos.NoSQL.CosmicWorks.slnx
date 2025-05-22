@@ -1,6 +1,9 @@
 ﻿<Solution>
   <Folder Name="/tests/">
-    <Project Path="tests/unit/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tests.Unit.csproj" />
+    <Project Path="tests/integration/data/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.Tests.Integration.csproj" />
+    <Project Path="tests/integration/tool/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Tests.Integration.csproj" />
+    <Project Path="tests/unit/data/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.Tests.Unit.csproj" />
+    <Project Path="tests/unit/tool/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Tests.Unit.csproj" />
   </Folder>
   <Project Path="data/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.csproj" />
   <Project Path="generator/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.csproj" />

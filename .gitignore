@@ -10,3 +10,6 @@ pkg/
 
 # .NET tool configuration
 .config/
+
+# CTRF files
+ctrf/

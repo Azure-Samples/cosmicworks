@@ -19,19 +19,32 @@ jobs:
             8.x
             9.x
             10.x
-      - name: Build solution
-        working-directory: ./src
-        run: |
-          dotnet build --configuration release
-      - name: Validates solution format
+      - name: Validates code style and format
         working-directory: ./src
         run: |
           dotnet format --verify-no-changes --severity info
-      - name: Run unit tests
+      - name: Build entire solution
         working-directory: ./src
         run: |
-          dotnet pack --configuration release
-      - name: Test package creation
+          dotnet build --configuration release
+      - name: Validate package creation
         working-directory: ./src/tool
         run: |
           dotnet pack --configuration release
+      - name: Run all unit tests
+        working-directory: ./src
+        run: |
+          dotnet test --logger "trx;logfilename=xunit.trx"
+      - name: Generate CTRF test results
+        working-directory: ./src/tests
+        run: |
+          dotnet new tool-manifest
+          dotnet tool install --local DotnetCtrfJsonReporter
+          dotnet tool run DotnetCtrfJsonReporter --test-tool "xunit" --trx-path "integration/data/TestResults/xunit.trx" --output-directory "ctrf" --output-filename "report-integration-data.json"
+          dotnet tool run DotnetCtrfJsonReporter --test-tool "xunit" --trx-path "unit/data/TestResults/xunit.trx" --output-directory "ctrf" --output-filename "report-unit-data.json"
+      - name: Publish CTRF test results
+        uses: ctrf-io/github-test-reporter@v1
+        with:
+          report-path: './src/tests/ctrf/report-*-*.json'
+        
+        

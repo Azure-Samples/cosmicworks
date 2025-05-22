@@ -16,6 +16,9 @@ namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
 /// <param name="Category">
 /// The category of the product.
 /// </param>
+/// <param name="SubCategory">
+/// The sub-category of the product associated with the category.
+/// </param>
 /// <param name="SKU">
 /// The stock keeping unit (SKU) for the product.
 /// </param>
@@ -28,6 +31,12 @@ namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
 /// <param name="Price">
 /// The sale price of the product.
 /// </param>
+/// <param name="Quantity">
+/// The quantity of the product in stock.
+/// </param>
+/// <param name="Clearance">
+/// Indicates if the product is on clearance.
+/// </param>
 /// <param name="Type">
 /// The type of the item. Default is "Product".
 /// </param>
@@ -35,11 +44,14 @@ public sealed record Product(
     string Id,
     string Name,
     string Description,
-    Category Category,
+    string Category,
+    string SubCategory,
     string SKU,
     IList<string> Tags,
     decimal Cost,
     decimal Price,
+    int Quantity,
+    bool Clearance,
     string Type = nameof(Product)
 )
 {
@@ -49,5 +61,5 @@ public sealed record Product(
     /// <returns>
     /// A string containing the product's unique identifier, name, and category.
     /// </returns>
-    public override string ToString() => $"{Id} | {Name} - {Category.Name}";
+    public override string ToString() => $"{Id} | {Name} - {Category}";
 }

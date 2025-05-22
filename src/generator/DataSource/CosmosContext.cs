@@ -14,6 +14,10 @@ public sealed class CosmosContext(
     /// <inheritdoc/>
     public async Task SeedDataAsync<T>(CosmosClientBuilderFactoryOptions factoryOptions, string databaseName, ContainerProperties containerProperties, IEnumerable<T> items, Action<string> onCreated)
     {
+        ArgumentNullException.ThrowIfNull(items);
+        ArgumentNullException.ThrowIfNull(factoryOptions);
+        ArgumentNullException.ThrowIfNull(containerProperties);
+
         CosmosClientBuilder clientBuilder = cosmosClientBuilderFactory.GetBuilder(factoryOptions);
 
         using CosmosClient client = clientBuilder
@@ -27,8 +31,6 @@ public sealed class CosmosContext(
             .Build();
 
         AccountProperties accountProperties = await client.ReadAccountAsync();
-
-
 
         Database database = factoryOptions.UseRoleBasedAccessControl ?
         client.GetDatabase(
@@ -52,7 +54,7 @@ public sealed class CosmosContext(
                 await database.ReplaceThroughputAsync(4000);
             }
 
-            List<Task> tasks = new(items.Count());
+            List<Task> tasks = [];
             foreach (var item in items)
             {
                 tasks.Add(
@@ -67,7 +69,7 @@ public sealed class CosmosContext(
                                 {
                                     throw response.Exception;
                                 }
-                            }
+                            }, TaskScheduler.Default
                         )
                 );
             }

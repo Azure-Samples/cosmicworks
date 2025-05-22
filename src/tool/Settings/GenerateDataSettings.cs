@@ -9,7 +9,7 @@ using Spectre.Console.Cli;
 /// <summary>
 /// Settings for generating data in the CosmicWorks tool.
 /// </summary>
-public sealed class GenerateDataSettings : CommandSettings
+internal sealed class GenerateDataSettings : CommandSettings
 {
     /// <summary>
     /// The connection string to the Azure Cosmos DB for NoSQL account.

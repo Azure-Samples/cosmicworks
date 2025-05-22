@@ -14,5 +14,8 @@ dotnet_diagnostic.CA1812.severity = none
 # CA1303: Do not pass literals as localized parameters
 dotnet_diagnostic.CA1303.severity = none
 
+# CA1308: Normalize strings to uppercase
+dotnet_diagnostic.CA1308.severity = none
+
 # IDE0058: Remove unnecessary expression value
 dotnet_diagnostic.IDE0058.severity = none

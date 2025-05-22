@@ -21,7 +21,7 @@ using Spectre.Console.Cli;
 /// <param name="employeeGenerator">
 /// The generator for employees.
 /// </param>
-public sealed class GenerateDataCommand(
+internal sealed class GenerateDataCommand(
     ICosmosDataGenerator<Product> productGenerator,
     ICosmosDataGenerator<Employee> employeeGenerator) : AsyncCommand<GenerateDataSettings>
 {

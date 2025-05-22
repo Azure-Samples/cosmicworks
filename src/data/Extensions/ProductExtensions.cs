@@ -15,7 +15,7 @@ internal static class ProductExtensions
                     new SubCategory(i.SubCategoryName)
                 ),
                 SKU: i.ProductNumber,
-                Tags: i.GetTags().ToList(),
+                Tags: [.. i.GetTags()],
                 Cost: i.Cost,
                 Price: i.ListPrice
             )

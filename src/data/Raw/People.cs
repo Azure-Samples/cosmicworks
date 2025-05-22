@@ -3,7 +3,7 @@ namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.Raw;
 
 internal static class People
 {
-    internal static IReadOnlyList<Person> Get() => GetEnumerable().ToList();
+    internal static IReadOnlyList<Person> Get() => [.. GetEnumerable()];
 
     private static IEnumerable<Person> GetEnumerable()
     {

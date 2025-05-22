@@ -29,11 +29,10 @@ public class ProductsCosmosDataGenerator(
         indexingPolicy.IncludedPaths.Add(new IncludedPath { Path = "/*" });
         indexingPolicy.ExcludedPaths.Add(new ExcludedPath { Path = "/\"_etag\"/?" });
         indexingPolicy.CompositeIndexes.Add(
-            new Collection<CompositePath>
-            {
+            [
                 new CompositePath() { Path = "/category/name", Order = CompositePathSortOrder.Ascending },
                 new CompositePath() { Path = "/category/subCategory/name", Order = CompositePathSortOrder.Ascending }
-            }
+            ]
         );
 
         ContainerProperties containerProperties = disableHierarchicalPartitionKeys ?
@@ -42,7 +41,7 @@ public class ProductsCosmosDataGenerator(
                 partitionKeyPath: "/category/name"
             ) : new ContainerProperties(
                 id: containerName,
-                partitionKeyPaths: new List<string> { "/category/name", "/category/subCategory/name" }
+                partitionKeyPaths: ["/category/name", "/category/subCategory/name"]
             );
         containerProperties.IndexingPolicy = indexingPolicy;
 

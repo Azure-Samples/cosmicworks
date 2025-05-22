@@ -29,19 +29,17 @@ public class EmployeesCosmosDataGenerator(
         indexingPolicy.IncludedPaths.Add(new IncludedPath { Path = "/*" });
         indexingPolicy.ExcludedPaths.Add(new ExcludedPath { Path = "/\"_etag\"/?" });
         indexingPolicy.CompositeIndexes.Add(
-            new Collection<CompositePath>
-            {
+            [
                 new CompositePath() { Path = "/company", Order = CompositePathSortOrder.Ascending },
                 new CompositePath() { Path = "/department", Order = CompositePathSortOrder.Ascending }
-            }
+            ]
         );
         indexingPolicy.CompositeIndexes.Add(
-            new Collection<CompositePath>
-            {
+            [
                 new CompositePath() { Path = "/company", Order = CompositePathSortOrder.Ascending },
                 new CompositePath() { Path = "/department", Order = CompositePathSortOrder.Ascending },
                 new CompositePath() { Path = "/territory", Order = CompositePathSortOrder.Ascending }
-            }
+            ]
         );
 
         ContainerProperties containerProperties = disableHierarchicalPartitionKeys ?
@@ -50,7 +48,7 @@ public class EmployeesCosmosDataGenerator(
                 partitionKeyPath: "/company"
             ) : new ContainerProperties(
                 id: containerName,
-                partitionKeyPaths: new List<string> { "/company", "/department", "/territory" }
+                partitionKeyPaths: ["/company", "/department", "/territory"]
             );
         containerProperties.IndexingPolicy = indexingPolicy;
 

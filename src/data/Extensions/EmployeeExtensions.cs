@@ -12,7 +12,7 @@ internal static class EmployeeExtensions
                     First: i.First,
                     Last: i.Last
                 ),
-                Addresses: new List<Address> {
+                Addresses: [
                     new Address(
                         Name: "Headquarters",
                         Street: $"1234 Oak Street",
@@ -20,7 +20,7 @@ internal static class EmployeeExtensions
                         State: "WA",
                         ZipCode: "23052"
                     )
-                },
+                ],
                 Company: "Adventure Works",
                 Department: i.Department,
                 EmailAddress: $"{i.First.ToLowerInvariant()}@adventure-works.com",

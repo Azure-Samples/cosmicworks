@@ -19,10 +19,9 @@ public sealed class ProductsDataSource : IDataSource<Product>
             _ => count
         };
 
-        return Raw.Things.Get()
+        return [.. Raw.Things.Get()
             .OrderBy(i => i.Id)
             .Take(generatedProductsCount)
-            .ToProducts()
-            .ToList();
+            .ToProducts()];
     }
 }

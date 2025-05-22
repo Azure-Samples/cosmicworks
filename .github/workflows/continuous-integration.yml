@@ -27,7 +27,11 @@ jobs:
         working-directory: ./src
         run: |
           dotnet format --verify-no-changes --severity info
-      - name: Create package
+      - name: Run unit tests
+        working-directory: ./src
+        run: |
+          dotnet pack --configuration release
+      - name: Test package creation
         working-directory: ./src/tool
         run: |
           dotnet pack --configuration release

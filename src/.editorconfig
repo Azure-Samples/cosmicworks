@@ -4,6 +4,9 @@
 # Code style settings
 csharp_style_namespace_declarations = file_scoped
 dotnet_style_prefer_global_using_directive = true:suggestion
+dotnet_separate_import_directive_groups = true
+dotnet_sort_system_directives_first = true
+file_header_template = Copyright (c) Microsoft Corporation. All rights reserved.
 
 # CA2007: Do not directly await a Task
 dotnet_diagnostic.CA2007.severity = none

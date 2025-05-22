@@ -1,8 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.BuilderFactory;
 
-using Microsoft.Azure.Cosmos.Fluent;
-
 /// <summary>
 /// A factory for creating <see cref="CosmosClientBuilder"/> instances.
 /// </summary>

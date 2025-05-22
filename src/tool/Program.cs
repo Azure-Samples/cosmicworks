@@ -1,15 +1,4 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.BuilderFactory;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.DataSource;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Commands;
-
-using Spectre.Console.Cli;
-
 ServiceCollection registrations = new();
 
 registrations.AddSingleton<ILoggerFactory, LoggerFactory>();

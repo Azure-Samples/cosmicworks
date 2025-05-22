@@ -1,11 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.BuilderFactory;
 
-using global::Azure.Core;
-using global::Azure.Identity;
-
-using Microsoft.Azure.Cosmos.Fluent;
-
 /// <inheritdoc/>
 public class CosmosClientBuilderFactory : ICosmosClientBuilderFactory
 {

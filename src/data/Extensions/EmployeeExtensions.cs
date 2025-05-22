@@ -1,8 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.Extensions;
 
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
-
 internal static class EmployeeExtensions
 {
     public static IEnumerable<Employee> ToEmployees(this IEnumerable<Raw.Person> items) =>

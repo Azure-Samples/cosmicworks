@@ -1,10 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator;
 
-using Microsoft.Azure.Cosmos.Fluent;
-
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.BuilderFactory;
-
 /// <summary>
 /// A data generator for Azure Cosmos DB for NoSQL.
 /// </summary>

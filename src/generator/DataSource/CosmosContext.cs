@@ -1,10 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.DataSource;
 
-using Microsoft.Azure.Cosmos;
-using Microsoft.Azure.Cosmos.Fluent;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.BuilderFactory;
-
 /// <inheritdoc/>
 public sealed class CosmosContext(
     ICosmosClientBuilderFactory cosmosClientBuilderFactory) : ICosmosContext

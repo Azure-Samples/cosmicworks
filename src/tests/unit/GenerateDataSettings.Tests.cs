@@ -1,10 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tests.Unit;
 
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Settings;
-
-using Spectre.Console;
-
 public class GenerateDataSettingsTests
 {
     [Fact]

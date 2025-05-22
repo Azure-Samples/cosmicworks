@@ -1,17 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Commands;
 
-using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
-
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.BuilderFactory;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Settings;
-
-using Spectre.Console;
-using Spectre.Console.Cli;
-
 /// <summary>
 /// A command to generate data.
 /// </summary>

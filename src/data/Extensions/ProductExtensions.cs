@@ -1,8 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.Extensions;
 
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
-
 internal static class ProductExtensions
 {
     public static IEnumerable<Product> ToProducts(this IEnumerable<Raw.Thing> items) =>

@@ -6,7 +6,7 @@ namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
 /// </summary>
 public sealed class EmployeesDataSource : IDataSource<Employee>
 {
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public IReadOnlyList<Employee> GetItems(int count = 234)
     {
         int generatedEmployeesCount = count switch

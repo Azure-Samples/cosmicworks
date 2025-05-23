@@ -53,7 +53,7 @@ public sealed record Product(
     int Quantity,
     bool Clearance,
     string Type = nameof(Product)
-)
+) : IItem
 {
     /// <summary>
     /// Outputs the product as a string.
@@ -62,4 +62,11 @@ public sealed record Product(
     /// A string containing the product's unique identifier, name, and category.
     /// </returns>
     public override string ToString() => $"{Id} | {Name} - {Category}";
+
+    /// <inheritdoc />
+    public IReadOnlyList<string> PartitionKeys =>
+    [
+        Category,
+        SubCategory,
+    ];
 }

@@ -95,8 +95,7 @@ public class EmployeeExtensionsTests
             Department: "department",
             EmailAddress: "first-name@adventure-works.com",
             PhoneNumber: "425-555-0000",
-            Territory: "region",
-            Type: nameof(Employee)
+            Territory: "region"
         );
 
         // Act

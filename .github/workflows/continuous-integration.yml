@@ -75,7 +75,7 @@ jobs:
           title: Unit test results
           report-path: './src/tests/ctrf/report-*-*.json'
   continuous-integration-dotnet-integration-tests:
-    name: .NET build and validation
+    name: Run .NET integration tests
     needs: [continuous-integration-dotnet-format, continuous-integration-dotnet-build, continuous-integration-dotnet-unit-tests]
     runs-on: ubuntu-latest
     services:

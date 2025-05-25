@@ -76,7 +76,6 @@ jobs:
       - name: Publish CTRF test results
         uses: ctrf-io/github-test-reporter@v1
         with:
-          title: Unit test results
           report-path: './src/tests/unit/**/ctrf/report-*-*.json'
   continuous-integration-dotnet-integration-tests:
     name: Run .NET integration tests
@@ -110,13 +109,12 @@ jobs:
         run: |
           dotnet new tool-manifest
           dotnet tool install --local DotnetCtrfJsonReporter
-          dotnet tool run DotnetCtrfJsonReporter --test-tool "xunit" --trx-path "integration/data/TestResults/xunit.trx" --output-directory "ctrf" --output-filename "report-integration-data.json"
-          dotnet tool run DotnetCtrfJsonReporter --test-tool "xunit" --trx-path "generator/data/TestResults/xunit.trx" --output-directory "ctrf" --output-filename "report-integration-generator.json"
-          dotnet tool run DotnetCtrfJsonReporter --test-tool "xunit" --trx-path "tool/data/TestResults/xunit.trx" --output-directory "ctrf" --output-filename "report-integration-tool.json"
+          dotnet tool run DotnetCtrfJsonReporter --test-tool "xunit" --trx-path "data/TestResults/xunit.trx" --output-directory "ctrf" --output-filename "report-integration-data.json"
+          dotnet tool run DotnetCtrfJsonReporter --test-tool "xunit" --trx-path "generator/TestResults/xunit.trx" --output-directory "ctrf" --output-filename "report-integration-generator.json"
+          dotnet tool run DotnetCtrfJsonReporter --test-tool "xunit" --trx-path "tool/TestResults/xunit.trx" --output-directory "ctrf" --output-filename "report-integration-tool.json"
       - name: Publish CTRF test results
         uses: ctrf-io/github-test-reporter@v1
         with:
-          title: Integration test results
           report-path: './src/tests/integration/**/ctrf/report-*-*.json'
         
         

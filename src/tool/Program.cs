@@ -3,7 +3,7 @@ ServiceCollection registrations = new();
 
 registrations.RegisterGeneratorServices();
 
-ServiceCollectionRegistrar registrar = new(registrations);
+ITypeRegistrar registrar = new ServiceCollectionRegistrar(registrations);
 
 CommandApp app = new(registrar);
 

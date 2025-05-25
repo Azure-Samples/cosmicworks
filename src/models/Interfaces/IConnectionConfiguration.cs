@@ -2,7 +2,7 @@
 namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models.Interfaces;
 
 /// <summary>
-/// Represents an item in Azure Cosmos DB for NoSQL.
+/// Interface for types that represent the configuration for connecting to an Azure Cosmos DB for NoSQL account.
 /// </summary>
 public interface IConnectionConfiguration
 {
@@ -20,4 +20,9 @@ public interface IConnectionConfiguration
     /// The endpoint to the Azure Cosmos DB for NoSQL account.
     /// </summary>
     string? Endpoint { get; }
+
+    /// <summary>
+    /// Hides the credentials when rendering to output.
+    /// </summary>
+    bool? HideCredentials { get; }
 }

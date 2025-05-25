@@ -6,6 +6,6 @@ public class PlaceholderTests
     [Fact]
     public void TrueTest()
     {
-        Assert.True(true);
+        CommandAppTester app = new();
     }
 }

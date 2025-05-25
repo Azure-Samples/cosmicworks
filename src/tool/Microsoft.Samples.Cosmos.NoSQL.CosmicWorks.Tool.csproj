@@ -24,7 +24,6 @@
     <PackageReference Include="Microsoft.Extensions.Logging" />
     <PackageReference Include="Spectre.Console" />
     <PackageReference Include="Spectre.Console.Cli" />
-    <PackageReference Include="Spectre.Console.Registrars.Microsoft-Di" />
   </ItemGroup>
   <ItemGroup>
     <None Include="readme.md" Pack="true" PackagePath="\" />

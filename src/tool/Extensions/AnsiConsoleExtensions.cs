@@ -3,12 +3,9 @@ namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Extensions;
 
 internal static class AnsiConsoleExtensions
 {
-    public static void WriteItem<T>(this IAnsiConsole console, T item)
-    {
-        console.MarkupLine($"[green][bold][[SEED]][/]\t{item}[/]");
-    }
+    public static void WriteItem<T>(this IAnsiConsole console, T item) => console.MarkupLine($"[green][bold][[SEED]][/]\t{item}[/]");
 
-    public static void WriteConfiguration(this IAnsiConsole console, GenerateSettings settings)
+    public static void WriteCredentials(this IAnsiConsole console, IConnectionConfiguration settings)
     {
         console.Write(new Rule("[yellow]Parsing connection string[/]").LeftJustified().RuleStyle("olive"));
 
@@ -24,7 +21,10 @@ internal static class AnsiConsoleExtensions
                     .Expand()
             );
         }
+    }
 
+    public static void WriteConfiguration<T>(this IAnsiConsole console, IItemSettings<T> settings) where T : IItem
+    {
         Grid grid = new();
         grid.AddColumn();
         grid.AddColumn();

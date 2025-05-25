@@ -3,6 +3,7 @@
 
 # Code style settings
 csharp_style_namespace_declarations = file_scoped
+csharp_style_expression_bodied_methods = when_on_single_line
 dotnet_style_prefer_global_using_directive = true:suggestion
 dotnet_separate_import_directive_groups = true
 dotnet_sort_system_directives_first = true

@@ -90,8 +90,9 @@ internal abstract class GenerateSettings : CommandSettings, IConnectionConfigura
     public bool? DisableHierarchicalPartitionKeys { get; init; } = false;
 
     /// <inheritdoc />
-    public override ValidationResult Validate() =>
-        (Endpoint, ConnectionString, Emulator) switch
+    public override ValidationResult Validate()
+    {
+        return (Endpoint, ConnectionString, Emulator) switch
         {
             (null, null, false) => ValidationResult.Error("You must provide a connection string, an endpoint, or use the emulator."),
             (_, not null, true) => ValidationResult.Error("You can't provide a connection string when using the emulator."),
@@ -101,4 +102,5 @@ internal abstract class GenerateSettings : CommandSettings, IConnectionConfigura
             (_, "", _) => ValidationResult.Error("You must provide a valid value for the connection string."),
             _ => ValidationResult.Success(),
         };
+    }
 }

@@ -21,16 +21,13 @@ internal sealed class GenerateProductsSettings : GenerateSettings
     public override ValidationResult Validate()
     {
         ValidationResult result = base.Validate();
-        if (!result.Successful)
-        {
-            return result;
-        }
-
-        return Quantity switch
-        {
-            < 1 => ValidationResult.Error("The quantity must be at least 1."),
-            > ProductsDataSource.MaxProductsCount => ValidationResult.Error($"The quantity must be less than {ProductsDataSource.MaxProductsCount + 1:N0}."),
-            _ => ValidationResult.Success(),
-        };
+        return !result.Successful
+            ? result
+            : Quantity switch
+            {
+                < 1 => ValidationResult.Error("The quantity must be at least 1."),
+                > ProductsDataSource.MaxProductsCount => ValidationResult.Error($"The quantity must be less than {ProductsDataSource.MaxProductsCount + 1:N0}."),
+                _ => ValidationResult.Success(),
+            };
     }
 }

@@ -16,6 +16,7 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: |
+            8.x
             9.x
             10.x
       - name: Run `dotnet format`
@@ -23,7 +24,7 @@ jobs:
         run: |
           dotnet format --verify-no-changes --severity info
   continuous-integration-dotnet-build:
-    name: Test .NET solution build
+    name: Test .NET build
     needs: [continuous-integration-dotnet-format]
     runs-on: ubuntu-latest
     steps:
@@ -39,9 +40,13 @@ jobs:
         working-directory: ./src
         run: |
           dotnet build --configuration release
-  continuous-integration-dotnet-package:
-    name: Test NuGet package creation
-    needs: [continuous-integration-dotnet-format]
+      - name: Validate NuGet package creation
+        working-directory: ./src/tool
+        run: |
+          dotnet pack --configuration release
+  continuous-integration-dotnet-unit-tests:
+    name: Run .NET unit tests
+    needs: [continuous-integration-dotnet-format, continuous-integration-dotnet-build]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -52,21 +57,6 @@ jobs:
             8.x
             9.x
             10.x
-      - name: Validate NuGet package creation
-        working-directory: ./src/tool
-        run: |
-          dotnet pack --configuration release
-  continuous-integration-dotnet-unit-tests:
-    name: Run .NET unit tests
-    needs: [continuous-integration-dotnet-format, continuous-integration-dotnet-build, continuous-integration-dotnet-package]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: |
-            9.x
       - name: Run .NET unit tests
         working-directory: ./src/tests/unit
         run: |
@@ -90,7 +80,7 @@ jobs:
           report-path: './src/tests/ctrf/report-*-*.json'
   continuous-integration-dotnet-integration-tests:
     name: Run .NET integration tests
-    needs: [continuous-integration-dotnet-format, continuous-integration-dotnet-build, continuous-integration-dotnet-package, continuous-integration-dotnet-unit-tests]
+    needs: [continuous-integration-dotnet-format, continuous-integration-dotnet-build, continuous-integration-dotnet-unit-tests]
     runs-on: ubuntu-latest
     services:
       cosmosdb:
@@ -106,7 +96,9 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: |
+            8.x
             9.x
+            10.x
       - name: Run .NET integration tests
         working-directory: ./src/tests/integration
         run: |

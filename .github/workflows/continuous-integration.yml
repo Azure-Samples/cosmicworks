@@ -77,13 +77,13 @@ jobs:
         uses: ctrf-io/github-test-reporter@v1
         with:
           title: Unit test results
-          report-path: './src/tests/ctrf/report-*-*.json'
+          report-path: './src/tests/unit/**/ctrf/report-*-*.json'
   continuous-integration-dotnet-integration-tests:
     name: Run .NET integration tests
     needs: [continuous-integration-dotnet-format, continuous-integration-dotnet-build, continuous-integration-dotnet-unit-tests]
     runs-on: ubuntu-latest
     services:
-      cosmosdb:
+      localhost:
         image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:vnext-preview
         ports:
           - 8081:8081
@@ -117,6 +117,6 @@ jobs:
         uses: ctrf-io/github-test-reporter@v1
         with:
           title: Integration test results
-          report-path: './src/tests/ctrf/report-*-*.json'
+          report-path: './src/tests/integration/**/ctrf/report-*-*.json'
         
         

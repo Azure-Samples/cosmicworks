@@ -16,6 +16,7 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: |
+            9.x
             10.x
       - name: Run `dotnet format`
         working-directory: ./src
@@ -65,7 +66,7 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: |
-            10.x
+            9.x
       - name: Run .NET unit tests
         working-directory: ./src/tests/unit
         run: |
@@ -105,7 +106,7 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: |
-            10.x
+            9.x
       - name: Run .NET integration tests
         working-directory: ./src/tests/integration
         run: |

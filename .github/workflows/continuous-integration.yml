@@ -38,10 +38,6 @@ jobs:
         working-directory: ./src
         run: |
           dotnet build --configuration release
-      - name: Validate NuGet package creation
-        working-directory: ./src/tool
-        run: |
-          dotnet pack --configuration release
   continuous-integration-dotnet-package:
     name: Test NuGet package creation
     needs: [continuous-integration-dotnet-format]
@@ -55,10 +51,6 @@ jobs:
             8.x
             9.x
             10.x
-      - name: Build .NET solution
-        working-directory: ./src
-        run: |
-          dotnet build --configuration release
       - name: Validate NuGet package creation
         working-directory: ./src/tool
         run: |

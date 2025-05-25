@@ -13,42 +13,52 @@ Populates an Azure Cosmos DB for NoSQL container with fictiuous data generated u
 ```csharp
 using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
 using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.DataSource;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.BuilderFactory;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.Services;
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
 
-CosmosClientBuilderFactoryOptions options = new()
+ConnectionOptions options = new()
 {
-  UseEmulator = true,
-  UseRoleBasedAccessControl = false,
-  Endpoint = null,
-  ConnectionString = null
+    Type = ConnectionType.MicrosoftEntra,
+    Credential = "<azure-cosmos-db-nosql-account-endpoint>"
 };
 
-// Seed "employees" database
-await new EmployeesCosmosDataGenerator(
-    cosmosContext: new CosmosContext(),
-    dataSource: new EmployeesDataSource()
-).GenerateAsync(
-    factoryOptions: options, 
-    databaseName: "cosmicworks",
-    containerName: "employees",
-    count: 200,
-    disableHierarchicalPartitionKeys: false
-    onItemCreate: (result) => Console.WriteLine($"[NEW PRODUCT]\t{result}")
-);
+{
+    // Seed "products" database
+    CosmosDataGenerator<Product> generator = new(
+        new ProductsDataSource(),
+        new CosmosDataService<Product>(
+            new CosmosClientService()
+        )
+    );
 
-// Seed "products" database
-await new ProductsCosmosDataGenerator(
-    cosmosContext: new CosmosContext(),
-    dataSource: new ProductsDataSource()
-).GenerateAsync(
-    factoryOptions: options,
-    databaseName: "cosmicworks",
-    containerName: "products",
-    count: 1000,
-    disableHierarchicalPartitionKeys: false
-    onItemCreate: (result) => Console.WriteLine($"[NEW EMPLOYEE]\t{result}")
-);
+    await generator.GenerateAsync(
+        options: options,
+        databaseName: "cosmicworks",
+        containerName: "products",
+        count: 1000,
+        disableHierarchicalPartitionKeys: false,
+        onItemCreate: (product) => Console.WriteLine($"[NEW PRODUCT]\t{product}")
+    );
+}
+
+{
+    // Seed "employees" database
+    CosmosDataGenerator<Product> generator = new(
+        new ProductsDataSource(),
+        new CosmosDataService<Product>(
+            new CosmosClientService()
+        )
+    );
+
+    await generator.GenerateAsync(
+        options: options,
+        databaseName: "cosmicworks",
+        containerName: "employees",
+        count: 200,
+        disableHierarchicalPartitionKeys: false,
+        onItemCreate: (employee) => Console.WriteLine($"[NEW EMPLOYEE]\t{employee}")
+    );
+}
 ```
 
 ## Data generated
@@ -95,18 +105,16 @@ Here's samples of the JSON data created using this tool with system-properties o
 {
   "name": "Taillights - Battery-Powered",
   "description": "Affordable light for safe night riding - uses 3 AAA batteries",
-  "category": {
-    "name": "Accessories",
-    "subCategory": {
-      "name": "Lights"
-    }
-  },
+  "category": "Accessories",
+  "subCategory": "Lights",
   "sku": "LT-T990",
   "tags": [
     "Accessories",
     "Lights"
   ],
-  "price": 918.85
+  "price": 918.85,
+  "quantity": 100,
+  "clearance": false
 }
 ```
 

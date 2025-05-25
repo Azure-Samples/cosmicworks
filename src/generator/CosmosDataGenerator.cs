@@ -5,8 +5,9 @@ namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator;
 /// A data generator for Azure Cosmos DB for NoSQL that generates items of a generic type.
 /// </summary>
 public class CosmosDataGenerator<T>(
-    ICosmosDataService<T> cosmosContext,
-    IDataSource<T> dataSource) : ICosmosDataGenerator<T> where T : IItem
+    IDataSource<T> dataSource,
+    ICosmosDataService<T> cosmosDataService
+) : ICosmosDataGenerator<T> where T : IItem
 {
     /// <inheritdoc />
     public async Task GenerateAsync(ConnectionOptions options, string databaseName, string containerName, int? count, bool disableHierarchicalPartitionKeys, Action<T> onItemCreate)
@@ -19,7 +20,7 @@ public class CosmosDataGenerator<T>(
         {
             string[] partitionKeys = [.. seedItems[0].PartitionKeys];
 
-            await cosmosContext.ProvisionResourcesAsync(
+            await cosmosDataService.ProvisionResourcesAsync(
                 options,
                 databaseName,
                 containerName,
@@ -28,7 +29,7 @@ public class CosmosDataGenerator<T>(
             );
         }
 
-        await cosmosContext.SeedDataAsync(
+        await cosmosDataService.SeedDataAsync(
             options,
             databaseName,
             containerName,

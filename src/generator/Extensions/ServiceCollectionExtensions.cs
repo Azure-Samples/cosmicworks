@@ -13,12 +13,15 @@ public static class ServiceCollectionExtensions
     {
         ArgumentNullException.ThrowIfNull(services);
 
-        services.AddSingleton<ICosmosDataService<Product>, CosmosDataService<Product>>();
-        services.AddSingleton<ICosmosDataService<Employee>, CosmosDataService<Employee>>();
-        services.AddSingleton<IDataSource<Product>, ProductsDataSource>();
-        services.AddSingleton<IDataSource<Employee>, EmployeesDataSource>();
-        services.AddSingleton<ICosmosDataGenerator<Product>, CosmosDataGenerator<Product>>();
-        services.AddSingleton<ICosmosDataGenerator<Employee>, CosmosDataGenerator<Employee>>();
+        services.AddTransient<IDataSource<Product>, ProductsDataSource>();
+        services.AddTransient<IDataSource<Employee>, EmployeesDataSource>();
+
         services.AddSingleton<ICosmosClientService, CosmosClientService>();
+
+        services.AddTransient<ICosmosDataService<Product>, CosmosDataService<Product>>();
+        services.AddTransient<ICosmosDataService<Employee>, CosmosDataService<Employee>>();
+
+        services.AddTransient<ICosmosDataGenerator<Product>, CosmosDataGenerator<Product>>();
+        services.AddTransient<ICosmosDataGenerator<Employee>, CosmosDataGenerator<Employee>>();
     }
 }

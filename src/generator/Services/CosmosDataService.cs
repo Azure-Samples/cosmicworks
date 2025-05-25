@@ -58,7 +58,7 @@ public sealed class CosmosDataService<T>(
                 }
                 // Attempt to create the container if it doesn't already exist.
                 ContainerProperties containerProperties = GenerateContainerProperties(containerName, partitionKeys, disableHierarchicalPartitionKeys);
-                Container container = await database.CreateContainerIfNotExistsAsync(containerProperties);
+                Container container = await database.CreateContainerIfNotExistsAsync(containerProperties, serverless ? null : fixedDatabaseThroughput);
             }
             catch (HttpRequestException ex)
             {

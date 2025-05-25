@@ -9,7 +9,7 @@ CosmicWorks is an open source set of tools and libraries to generate data quickl
 ## Install
 
 ```bash
-dotnet tool install --global cosmicworks
+dotnet tool install --global cosmicworks --version 3.x
 ```
 
 ## Examples

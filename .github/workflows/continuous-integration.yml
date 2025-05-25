@@ -10,6 +10,15 @@ jobs:
   continuous-integration-dotnet:
     name: .NET build and validation
     runs-on: ubuntu-latest
+    services:
+      cosmosdb:
+        image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:vnext-preview
+        ports:
+          - 8081:8081
+          - 1234:1234
+          - 10250-10255:10250-10255
+        env:
+          PROTOCOL: https
     steps:
       - name: Checkout
         uses: actions/checkout@v4

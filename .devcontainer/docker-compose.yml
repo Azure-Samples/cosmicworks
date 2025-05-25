@@ -1,0 +1,18 @@
+version: '3'
+services:
+  dev:
+    image: mcr.microsoft.com/devcontainers/dotnet:10.0-preview-noble
+    command: sleep infinity
+    volumes:
+      - ..:/workspace
+    network_mode: service:cosmosdb
+    depends_on:
+      - cosmosdb
+  cosmosdb:
+    image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:vnext-preview
+    restart: unless-stopped
+    expose:
+      - 8081:8081
+      - 1234:1234
+    environment:
+      PROTOCOL: https

@@ -6,6 +6,6 @@ public class PlaceholderTests
     [Fact]
     public void TrueTest()
     {
-        CommandAppTester app = new();
+        _ = new CommandAppTester();
     }
 }

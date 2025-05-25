@@ -23,6 +23,7 @@ jobs:
           dotnet format --verify-no-changes --severity info
   continuous-integration-dotnet-build:
     name: Build .NET solution
+    needs: [continuous-integration-dotnet-format]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

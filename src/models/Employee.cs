@@ -54,8 +54,8 @@ public sealed record Employee(
     /// <inheritdoc />
     public IReadOnlyList<string> PartitionKeys =>
     [
-        Company,
-        Department,
-        Territory,
+        nameof(Company),
+        nameof(Department),
+        nameof(Territory)
     ];
 }

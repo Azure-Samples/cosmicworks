@@ -6,14 +6,20 @@ namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
 /// </summary>
 public sealed class EmployeesDataSource : IDataSource<Employee>
 {
+    /// <summary>
+    /// The maximum number of employees that can be generated.
+    /// </summary>
+    public const int MaxEmployeesCount = 234;
+
     /// <inheritdoc />
-    public IReadOnlyList<Employee> GetItems(int count = 234)
+    public IReadOnlyList<Employee> GetItems(int? count = MaxEmployeesCount)
     {
         int generatedEmployeesCount = count switch
         {
-            > 234 => throw new ArgumentOutOfRangeException(nameof(count), "You cannot generate more than 234 employees."),
+            null => MaxEmployeesCount,
+            > MaxEmployeesCount => throw new ArgumentOutOfRangeException(nameof(count), $"You cannot generate more than {MaxEmployeesCount:N0} employees."),
             < 1 => throw new ArgumentOutOfRangeException(nameof(count), "You must generate at least one employee"),
-            _ => count
+            not null => count.Value
         };
 
         return [.. new People()

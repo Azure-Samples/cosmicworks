@@ -16,7 +16,7 @@ public class ProductsDataSourceTests
         Assert.NotNull(result);
         Assert.NotEmpty(result);
         Assert.All(result, Assert.NotNull);
-        Assert.Equal(1759, result.Count);
+        Assert.Equal(ProductsDataSource.MaxProductsCount, result.Count);
     }
 
     [Fact]

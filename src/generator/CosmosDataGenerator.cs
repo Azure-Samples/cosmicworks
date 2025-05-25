@@ -10,11 +10,13 @@ public class CosmosDataGenerator<T>(
 ) : ICosmosDataGenerator<T> where T : IItem
 {
     /// <inheritdoc />
-    public async Task GenerateAsync(ConnectionOptions options, string databaseName, string containerName, int? count, bool disableHierarchicalPartitionKeys, Action<T> onItemCreate)
+    public async Task GenerateAsync(ConnectionOptions options, string databaseName, string containerName, int? count = null, bool disableHierarchicalPartitionKeys = false, Action<T>? onItemCreate = null)
     {
         ArgumentNullException.ThrowIfNull(options);
 
-        IReadOnlyList<T> seedItems = count is null ? dataSource.GetItems() : dataSource.GetItems(count.Value);
+        onItemCreate ??= _ => { };
+
+        IReadOnlyList<T> seedItems = dataSource.GetItems(count);
 
         if (options.Type == ConnectionType.ResourceOwnerPasswordCredential)
         {

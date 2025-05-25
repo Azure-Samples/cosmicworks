@@ -16,7 +16,7 @@ public class EmployeesDataSourceTests
         Assert.NotNull(result);
         Assert.NotEmpty(result);
         Assert.All(result, Assert.NotNull);
-        Assert.Equal(234, result.Count);
+        Assert.Equal(EmployeesDataSource.MaxEmployeesCount, result.Count);
     }
 
     [Fact]

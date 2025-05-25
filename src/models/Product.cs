@@ -66,7 +66,7 @@ public sealed record Product(
     /// <inheritdoc />
     public IReadOnlyList<string> PartitionKeys =>
     [
-        Category,
-        SubCategory,
+        nameof(Category),
+        nameof(SubCategory)
     ];
 }

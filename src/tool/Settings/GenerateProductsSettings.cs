@@ -1,4 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
+
 namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Settings;
 
 /// <summary>
@@ -27,7 +29,7 @@ internal sealed class GenerateProductsSettings : GenerateSettings
         return Quantity switch
         {
             < 1 => ValidationResult.Error("The quantity must be at least 1."),
-            > 1759 => ValidationResult.Error("The quantity must be less than 1760."),
+            > ProductsDataSource.MaxProductsCount => ValidationResult.Error($"The quantity must be less than {ProductsDataSource.MaxProductsCount + 1:N0}."),
             _ => ValidationResult.Success(),
         };
     }

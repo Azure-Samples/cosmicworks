@@ -19,5 +19,5 @@ public interface IDataSource<T>
     /// <returns>
     /// A read-only list of items.
     /// </returns>
-    IReadOnlyList<T> GetItems(int count = default);
+    IReadOnlyList<T> GetItems(int? count);
 }

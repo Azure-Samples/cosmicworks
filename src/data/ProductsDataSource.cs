@@ -6,14 +6,20 @@ namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
 /// </summary>
 public sealed class ProductsDataSource : IDataSource<Product>
 {
+    /// <summary>
+    /// The maximum number of products that can be generated.
+    /// </summary>
+    public const int MaxProductsCount = 1759;
+
     /// <inheritdoc />
-    public IReadOnlyList<Product> GetItems(int count = 1759)
+    public IReadOnlyList<Product> GetItems(int? count = MaxProductsCount)
     {
         int generatedProductsCount = count switch
         {
-            > 1759 => throw new ArgumentOutOfRangeException(nameof(count), "You cannot generate more than 1,759 products."),
+            null => MaxProductsCount,
+            > MaxProductsCount => throw new ArgumentOutOfRangeException(nameof(count), $"You cannot generate more than {MaxProductsCount:N0} products."),
             < 1 => throw new ArgumentOutOfRangeException(nameof(count), "You must generate at least one product."),
-            _ => count
+            not null => count.Value
         };
 
         return [.. new Things()

@@ -204,7 +204,7 @@ public class GenerateProductsSettingsTests
 
         // Assert
         Assert.False(result.Successful);
-        Assert.Equal("The quantity must be less than 1760.", result.Message);
+        Assert.Equal("The quantity must be less than 1,760.", result.Message);
     }
 
     [Fact]
@@ -214,7 +214,7 @@ public class GenerateProductsSettingsTests
         GenerateProductsSettings settings = new()
         {
             Emulator = true,
-            Quantity = 1759
+            Quantity = ProductsDataSource.MaxProductsCount
         };
 
         // Act

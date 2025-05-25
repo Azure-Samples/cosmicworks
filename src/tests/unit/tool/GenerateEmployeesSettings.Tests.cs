@@ -214,7 +214,7 @@ public class GenerateEmployeesSettingsTests
         GenerateEmployeesSettings settings = new()
         {
             Emulator = true,
-            Quantity = 234
+            Quantity = EmployeesDataSource.MaxEmployeesCount
         };
 
         // Act

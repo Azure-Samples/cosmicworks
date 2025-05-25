@@ -1,4 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
+using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
+
 namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Settings;
 
 /// <summary>
@@ -27,7 +29,7 @@ internal sealed class GenerateEmployeesSettings : GenerateSettings
         string? error = Quantity switch
         {
             < 1 => "The quantity must be at least 1.",
-            > 234 => "The quantity must be less than 235.",
+            > EmployeesDataSource.MaxEmployeesCount => $"The quantity must be less than {EmployeesDataSource.MaxEmployeesCount + 1:N0}.",
             _ => null,
         };
 

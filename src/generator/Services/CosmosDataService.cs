@@ -1,4 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.Services;
 
 /// <inheritdoc />
@@ -33,6 +36,12 @@ public sealed class CosmosDataService<T>(
                     // The database already exists.
                     serverless = false;
                 }
+                catch (CosmosException ex) when (ex.StatusCode == HttpStatusCode.InternalServerError)
+                {
+                    // This is likely due to the account being the Docker emulator, which does not support reading throughput.
+                    // But, the database already exists.
+                    serverless = true;
+                }
                 catch (CosmosException ex) when (ex.StatusCode == HttpStatusCode.BadRequest)
                 {
                     // The account is serverless, so we can't read throughput.
@@ -56,9 +65,21 @@ public sealed class CosmosDataService<T>(
                         serverless = true;
                     }
                 }
-                // Attempt to create the container if it doesn't already exist.
-                ContainerProperties containerProperties = GenerateContainerProperties(containerName, partitionKeys, disableHierarchicalPartitionKeys);
-                Container container = await database.CreateContainerIfNotExistsAsync(containerProperties, serverless ? null : fixedDatabaseThroughput);
+                try
+                {
+                    // Attempt to create the container if it doesn't already exist.
+                    ContainerProperties containerProperties = GenerateContainerProperties(containerName, partitionKeys, disableHierarchicalPartitionKeys);
+                    ThroughputProperties? throughputProperties = serverless ? null : ThroughputProperties.CreateManualThroughput(fixedDatabaseThroughput);
+                    Container container = await database.CreateContainerIfNotExistsAsync(containerProperties, throughputProperties);
+                }
+                catch (CosmosException ex) when (ex.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    // Creating a container with hierarchical partition keys is not supported for the account type.
+                    throw new ClientException(
+                        "This account type does not support hierarchical partition keys. Please use a different account type or partition key type.",
+                        ex
+                    );
+                }
             }
             catch (HttpRequestException ex)
             {
@@ -113,17 +134,26 @@ public sealed class CosmosDataService<T>(
             );
         }
 
-        ContainerProperties containerProperties = disableHierarchicalPartitionKeys ?
-            new ContainerProperties(
-                id: containerName,
-                partitionKeyPath: partitionKeys.First()
-            ) : new ContainerProperties(
-                id: containerName,
-                partitionKeyPaths: partitionKeys
-            )
-            {
-                IndexingPolicy = indexingPolicy
-            };
+        IReadOnlyList<string> partitionKeyPaths = [..
+            (partitionKeys.Length > 0 ? partitionKeys : ["id"])
+                .Select(JsonNamingPolicy.CamelCase.ConvertName)
+                .Select(key => $"/{key}")
+        ];
+
+        ContainerProperties containerProperties = new()
+        {
+            Id = containerName,
+            IndexingPolicy = indexingPolicy
+        };
+
+        if (disableHierarchicalPartitionKeys)
+        {
+            containerProperties.PartitionKeyPath = partitionKeyPaths[0];
+        }
+        else
+        {
+            containerProperties.PartitionKeyPaths = partitionKeyPaths;
+        }
 
         return containerProperties;
     }

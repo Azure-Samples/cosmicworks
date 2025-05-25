@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.Tests.Integration;
 
-public sealed class CosmosDataGeneratorTests : IAsyncLifetime
+public class CosmosDataGeneratorTests : IAsyncLifetime
 {
     private readonly string testDatabaseName = $"cosmicworks-database-integration-{DateTimeOffset.UtcNow:s}";
 

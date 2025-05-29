@@ -16,10 +16,10 @@ internal class Entity<T> : IReadOnlyList<T>
         bool filter(string name) => name.Contains(fileName, StringComparison.OrdinalIgnoreCase);
 
         string? resource = assembly.GetManifestResourceNames().FirstOrDefault(filter)
-            ?? throw new ArgumentException($"The resource {fileName} was not found in the assembly {assembly.FullName}.", nameof(fileName));
+            ?? throw new FileNotFoundException($"The resource {fileName} was not found in the assembly {assembly.FullName}.", nameof(fileName));
 
         using Stream? stream = assembly.GetManifestResourceStream(resource)
-            ?? throw new ArgumentException($"The resource {resource} could not be loaded.", nameof(fileName));
+            ?? throw new FileLoadException($"The resource {resource} could not be loaded.", nameof(fileName));
         using StreamReader reader = new(stream);
 
         string yaml = reader.ReadToEnd();

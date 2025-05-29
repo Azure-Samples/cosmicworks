@@ -4,7 +4,7 @@ namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.Tests.Unit;
 public class EntityTests
 {
     [Fact]
-    public void MissingFileTest()
+    public void MissingEmbeddedFileTest()
     {
         // Arrange
         string filename = "<invalid-file-name>";
@@ -14,5 +14,19 @@ public class EntityTests
         {
             new Entity<dynamic>(filename);
         });
+    }
+
+    [Fact]
+    public void ValidEmbeddedFilesTest()
+    {
+        // Arrange
+        string filename = "people.yaml";
+
+        // Act
+        Entity<dynamic> entity = new(filename);
+
+        // Assert
+        Assert.NotNull(entity);
+        Assert.NotEmpty(entity);
     }
 }

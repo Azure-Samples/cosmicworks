@@ -22,7 +22,8 @@ public class CosmosDataGeneratorTests : IAsyncLifetime
         ConnectionOptions options = new()
         {
             Type = ConnectionType.ResourceOwnerPasswordCredential,
-            Credential = Constants.EmulatorCredential
+            Credential = Constants.EmulatorCredential,
+            Emulator = true
         };
 
         // Act
@@ -37,7 +38,8 @@ public class CosmosDataGeneratorTests : IAsyncLifetime
         CosmosClient client = clientService.GetCosmosClient(new ConnectionOptions
         {
             Type = ConnectionType.ResourceOwnerPasswordCredential,
-            Credential = Constants.EmulatorCredential
+            Credential = Constants.EmulatorCredential,
+            Emulator = true
         });
         Container container = client.GetContainer(testDatabaseName, testProductsContainerName);
         FeedIterator<Product> feed = container.GetItemLinqQueryable<Product>().ToFeedIterator();
@@ -61,7 +63,8 @@ public class CosmosDataGeneratorTests : IAsyncLifetime
         ConnectionOptions options = new()
         {
             Type = ConnectionType.ResourceOwnerPasswordCredential,
-            Credential = Constants.EmulatorCredential
+            Credential = Constants.EmulatorCredential,
+            Emulator = true
         };
 
         // Act
@@ -76,7 +79,8 @@ public class CosmosDataGeneratorTests : IAsyncLifetime
         CosmosClient client = clientService.GetCosmosClient(new ConnectionOptions
         {
             Type = ConnectionType.ResourceOwnerPasswordCredential,
-            Credential = Constants.EmulatorCredential
+            Credential = Constants.EmulatorCredential,
+            Emulator = true
         });
         Container container = client.GetContainer(testDatabaseName, testEmployeesContainerName);
         FeedIterator<Employee> feed = container.GetItemLinqQueryable<Employee>().ToFeedIterator();
@@ -96,7 +100,8 @@ public class CosmosDataGeneratorTests : IAsyncLifetime
         ConnectionOptions options = new()
         {
             Type = ConnectionType.ResourceOwnerPasswordCredential,
-            Credential = Constants.EmulatorCredential
+            Credential = Constants.EmulatorCredential,
+            Emulator = true
         };
 
         CosmosClient client = clientService.GetCosmosClient(options);

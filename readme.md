@@ -4,7 +4,10 @@ CosmicWorks is an open source set of tools and libraries to generate data quickl
 
 ## Prerequisites
 
-- [.NET 9.0](https://dotnet.microsoft.com/download/dotnet/9.0)
+- Supported .NET version
+  - [.NET 8.0](https://dotnet.microsoft.com/download/dotnet/8.0)
+  - [.NET 9.0](https://dotnet.microsoft.com/download/dotnet/9.0)
+  - [.NET 10.0](https://dotnet.microsoft.com/download/dotnet/10.0)
 
 ## NuGet links
 
@@ -15,7 +18,7 @@ CosmicWorks is an open source set of tools and libraries to generate data quickl
 
 ## Component source code
 
-- [`CosmicWorks` tool](src/CosmicWorks.Tool/readme.md)
-- [`CosmicWorks.Data` fictituous data library](src/CosmicWorks.Data/readme.md)
-- [`CosmicWorks.Generator` data seeding library](src/CosmicWorks.Generator/readme.md)
-- [`CosmicWorks.Models` model library](src/CosmicWorks.Models/readme.md)
+- [`CosmicWorks` tool](src/tool/readme.md)
+- [`CosmicWorks.Data` fictituous data library](src/data/readme.md)
+- [`CosmicWorks.Generator` data seeding library](src/generator/readme.md)
+- [`CosmicWorks.Models` model library](src/models/readme.md)

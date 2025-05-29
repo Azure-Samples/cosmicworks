@@ -1,28 +1,30 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
 
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.Extensions;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
-
 /// <summary>
 /// A data source that generates items of type <see cref="Product"/>.
 /// </summary>
 public sealed class ProductsDataSource : IDataSource<Product>
 {
-    /// <inheritdoc/>
-    public IReadOnlyList<Product> GetItems(int count = 1759)
+    /// <summary>
+    /// The maximum number of products that can be generated.
+    /// </summary>
+    public const int MaxProductsCount = 1759;
+
+    /// <inheritdoc />
+    public IReadOnlyList<Product> GetItems(int? count = MaxProductsCount)
     {
         int generatedProductsCount = count switch
         {
-            > 1759 => throw new ArgumentOutOfRangeException(nameof(count), "You cannot generate more than 1,759 products."),
+            null => MaxProductsCount,
+            > MaxProductsCount => throw new ArgumentOutOfRangeException(nameof(count), $"You cannot generate more than {MaxProductsCount:N0} products."),
             < 1 => throw new ArgumentOutOfRangeException(nameof(count), "You must generate at least one product."),
-            _ => count
+            not null => count.Value
         };
 
-        return Raw.Things.Get()
+        return [.. new Things()
             .OrderBy(i => i.Id)
             .Take(generatedProductsCount)
-            .ToProducts()
-            .ToList();
+            .ToProducts()];
     }
 }

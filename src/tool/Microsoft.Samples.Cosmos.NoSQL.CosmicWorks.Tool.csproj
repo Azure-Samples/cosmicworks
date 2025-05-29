@@ -1,42 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  <PropertyGroup>
     <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <PropertyGroup>
     <AssemblyName>cosmicworks</AssemblyName>
     <RootNamespace>Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool</RootNamespace>
-    <TargetFramework>net9.0</TargetFramework>
-    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
-    <LangVersion>latest</LangVersion>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>cosmicworks</ToolCommandName>
-    <PackageOutputPath>./pkg</PackageOutputPath>
     <PackageId>CosmicWorks</PackageId>
-    <Authors>Microsoft</Authors>
-    <Company>Microsoft</Company>
     <PackageTags>Azure;Cosmos DB;Cosmos;NoSQL;DocumentDb;Tool;CLI;CosmosDB</PackageTags>
-    <PackageReadmeFile>readme.md</PackageReadmeFile>
     <Description>
       Command-line tool to generate fictiuous data and populates an Azure Cosmos DB for NoSQL account with the data.
     </Description>
     <ProjectUrl>https://github.com/azure-samples/cosmicworks/tree/main/readme.md</ProjectUrl>
-    <RepositoryUrl>https://github.com/azure-samples/cosmicworks</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageIcon>icon.png</PackageIcon>
-    <RollForward>LatestMajor</RollForward>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AnalysisMode>Recommended</AnalysisMode>
-    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="Microsoft.Extensions.Logging" />
     <PackageReference Include="Spectre.Console" />
     <PackageReference Include="Spectre.Console.Cli" />
-    <PackageReference Include="Spectre.Console.Registrars.Microsoft-Di" />
   </ItemGroup>
   <ItemGroup>
     <None Include="readme.md" Pack="true" PackagePath="\" />
@@ -46,5 +33,8 @@
   <ItemGroup>
     <ProjectReference Include="..\generator\Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.csproj" />
     <ProjectReference Include="..\models\Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Tests.Unit" />
   </ItemGroup>
 </Project>

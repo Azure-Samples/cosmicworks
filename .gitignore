@@ -4,5 +4,12 @@ __*
 # Visual Studio Code
 .vscode/
 
-# .NET tools
+# NuGet package files
+pkg/
+*.nupkg
+
+# .NET tool configuration
 .config/
+
+# CTRF files
+ctrf/

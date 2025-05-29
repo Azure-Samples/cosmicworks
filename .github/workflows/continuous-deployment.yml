@@ -1,0 +1,56 @@
+name: Continuous Deployment
+on: 
+  workflow_dispatch:
+    inputs:
+      versionPrefix:
+        description: 'Version prefix for the NuGet package'
+        required: true
+        default: '3.0.0'
+      versionSuffix:
+        description: 'Version suffix for the NuGet package'
+        required: false
+permissions:
+  contents: read
+jobs:
+  continuous-deployment-nuget:
+    name: Deploy to NuGet
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./src
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.x
+            9.x
+            10.x
+      - name: Package NuGet stable models
+        if: ${{ inputs.versionSuffix == '' }}
+        run: dotnet pack models/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models.csproj --output out/ --include-symbols /p:VersionPrefix="${{ inputs.versionPrefix }}"
+      - name: Package NuGet preview models
+        if: ${{ inputs.versionSuffix != '' }}
+        run: dotnet pack models/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models.csproj --output out/ --include-symbols /p:VersionPrefix="${{ inputs.versionPrefix }}" /p:VersionSuffix="${{ inputs.versionSuffix }}"
+      - name: Package NuGet stable library
+        if: ${{ inputs.versionSuffix == '' }}
+        run: dotnet pack data/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.csproj --output out/ --include-symbols /p:VersionPrefix="${{ inputs.versionPrefix }}"
+      - name: Package NuGet preview library
+        if: ${{ inputs.versionSuffix != '' }}
+        run: dotnet pack data/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.csproj --output out/ --include-symbols /p:VersionPrefix="${{ inputs.versionPrefix }}" /p:VersionSuffix="${{ inputs.versionSuffix }}"
+      - name: Package NuGet stable generator
+        if: ${{ inputs.versionSuffix == '' }}
+        run: dotnet pack generator/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.csproj --output out/ --include-symbols /p:VersionPrefix="${{ inputs.versionPrefix }}"
+      - name: Package NuGet preview generator
+        if: ${{ inputs.versionSuffix != '' }}
+        run: dotnet pack generator/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.csproj --output out/ --include-symbols /p:VersionPrefix="${{ inputs.versionPrefix }}" /p:VersionSuffix="${{ inputs.versionSuffix }}"
+      - name: Package NuGet stable tool
+        if: ${{ inputs.versionSuffix == '' }}
+        run: dotnet pack tool/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.csproj --output out/ --include-symbols /p:VersionPrefix="${{ inputs.versionPrefix }}"
+      - name: Package NuGet preview tool
+        if: ${{ inputs.versionSuffix != '' }}
+        run: dotnet pack tool/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.csproj --output out/ --include-symbols /p:VersionPrefix="${{ inputs.versionPrefix }}" /p:VersionSuffix="${{ inputs.versionSuffix }}"
+      - name: Push NuGet packages
+        working-directory: ./src/out
+        run: dotnet nuget push "**/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate

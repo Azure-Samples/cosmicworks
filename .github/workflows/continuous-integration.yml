@@ -1,0 +1,120 @@
+name: Continuous Integration
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+permissions:
+  contents: read
+jobs:
+  continuous-integration-dotnet-format:
+    name: Check .NET syntax and style
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.x
+            9.x
+            10.x
+      - name: Run `dotnet format`
+        working-directory: ./src
+        run: |
+          dotnet format --verify-no-changes --severity info
+  continuous-integration-dotnet-build:
+    name: Test .NET build
+    needs: [continuous-integration-dotnet-format]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.x
+            9.x
+            10.x
+      - name: Build .NET solution
+        working-directory: ./src
+        run: |
+          dotnet build --configuration release
+      - name: Validate NuGet package creation
+        working-directory: ./src/tool
+        run: |
+          dotnet pack --configuration release
+  continuous-integration-dotnet-unit-tests:
+    name: Run .NET unit tests
+    needs: [continuous-integration-dotnet-format, continuous-integration-dotnet-build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.x
+            9.x
+            10.x
+      - name: Run .NET unit tests
+        working-directory: ./src/tests/unit
+        run: |
+          dotnet test ./models/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models.Tests.Unit.csproj --logger "trx;logfilename=xunit.trx"
+          dotnet test ./data/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.Tests.Unit.csproj --logger "trx;logfilename=xunit.trx"
+          dotnet test ./generator/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.Tests.Unit.csproj --logger "trx;logfilename=xunit.trx"
+          dotnet test ./tool/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Tests.Unit.csproj --logger "trx;logfilename=xunit.trx"
+      - name: Generate CTRF test results
+        working-directory: ./src/tests/unit
+        run: |
+          dotnet new tool-manifest
+          dotnet tool install --local DotnetCtrfJsonReporter
+          dotnet tool run DotnetCtrfJsonReporter --test-tool "xunit" --trx-path "models/TestResults/xunit.trx" --output-directory "ctrf" --output-filename "report-unit-models.json"
+          dotnet tool run DotnetCtrfJsonReporter --test-tool "xunit" --trx-path "data/TestResults/xunit.trx" --output-directory "ctrf" --output-filename "report-unit-data.json"
+          dotnet tool run DotnetCtrfJsonReporter --test-tool "xunit" --trx-path "generator/TestResults/xunit.trx" --output-directory "ctrf" --output-filename "report-unit-generator.json"
+          dotnet tool run DotnetCtrfJsonReporter --test-tool "xunit" --trx-path "tool/TestResults/xunit.trx" --output-directory "ctrf" --output-filename "report-unit-tool.json"
+      - name: Publish CTRF test results
+        uses: ctrf-io/github-test-reporter@v1
+        with:
+          report-path: './src/tests/unit/**/ctrf/report-*-*.json'
+  continuous-integration-dotnet-integration-tests:
+    name: Run .NET integration tests
+    needs: [continuous-integration-dotnet-format, continuous-integration-dotnet-build, continuous-integration-dotnet-unit-tests]
+    runs-on: ubuntu-latest
+    services:
+      localhost:
+        image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:vnext-preview
+        ports:
+          - 8081:8081
+          - 1234:1234
+        env:
+          PROTOCOL: https
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.x
+            9.x
+            10.x
+      - name: Run .NET integration tests
+        working-directory: ./src/tests/integration
+        run: |
+          dotnet test ./data/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.Tests.Integration.csproj --logger "trx;logfilename=xunit.trx"
+          dotnet test ./generator/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Generator.Tests.Integration.csproj --logger "trx;logfilename=xunit.trx"
+          dotnet test ./tool/Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Tool.Tests.Integration.csproj --logger "trx;logfilename=xunit.trx"
+      - name: Generate CTRF test results
+        working-directory: ./src/tests/integration
+        run: |
+          dotnet new tool-manifest
+          dotnet tool install --local DotnetCtrfJsonReporter
+          dotnet tool run DotnetCtrfJsonReporter --test-tool "xunit" --trx-path "data/TestResults/xunit.trx" --output-directory "ctrf" --output-filename "report-integration-data.json"
+          dotnet tool run DotnetCtrfJsonReporter --test-tool "xunit" --trx-path "generator/TestResults/xunit.trx" --output-directory "ctrf" --output-filename "report-integration-generator.json"
+          dotnet tool run DotnetCtrfJsonReporter --test-tool "xunit" --trx-path "tool/TestResults/xunit.trx" --output-directory "ctrf" --output-filename "report-integration-tool.json"
+      - name: Publish CTRF test results
+        uses: ctrf-io/github-test-reporter@v1
+        with:
+          report-path: './src/tests/integration/**/ctrf/report-*-*.json'
+        
+        

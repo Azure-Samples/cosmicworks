@@ -41,7 +41,7 @@ public sealed record Employee(
     string PhoneNumber,
     string Territory,
     string Type = nameof(Employee)
-)
+) : IItem
 {
     /// <summary>
     /// Outputs the product as a string.
@@ -50,4 +50,12 @@ public sealed record Employee(
     /// A string containing the product's unique identifier, name, and category.
     /// </returns>
     public override string ToString() => $"{Id} | {Name.First} {Name.Last}";
+
+    /// <inheritdoc />
+    public IReadOnlyList<string> PartitionKeys =>
+    [
+        nameof(Company),
+        nameof(Department),
+        nameof(Territory)
+    ];
 }

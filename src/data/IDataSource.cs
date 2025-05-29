@@ -13,10 +13,11 @@ public interface IDataSource<T>
     /// Gets a read-only list of items from the data source.
     /// </summary>
     /// <param name="count">
-    /// The number of items to retrieve.
+    /// The optional number of items to retrieve.
+    /// If not specified, all items will be retrieved by default.
     /// </param>
     /// <returns>
     /// A read-only list of items.
     /// </returns>
-    IReadOnlyList<T> GetItems(int count);
+    IReadOnlyList<T> GetItems(int? count);
 }

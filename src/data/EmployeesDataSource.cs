@@ -1,28 +1,30 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 namespace Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data;
 
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Data.Extensions;
-using Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models;
-
 /// <summary>
 /// A data source that generates items of type <see cref="Employee"/>.
 /// </summary>
 public sealed class EmployeesDataSource : IDataSource<Employee>
 {
-    /// <inheritdoc/>
-    public IReadOnlyList<Employee> GetItems(int count = 234)
+    /// <summary>
+    /// The maximum number of employees that can be generated.
+    /// </summary>
+    public const int MaxEmployeesCount = 234;
+
+    /// <inheritdoc />
+    public IReadOnlyList<Employee> GetItems(int? count = MaxEmployeesCount)
     {
         int generatedEmployeesCount = count switch
         {
-            > 234 => throw new ArgumentOutOfRangeException(nameof(count), "You cannot generate more than 234 employees."),
+            null => MaxEmployeesCount,
+            > MaxEmployeesCount => throw new ArgumentOutOfRangeException(nameof(count), $"You cannot generate more than {MaxEmployeesCount:N0} employees."),
             < 1 => throw new ArgumentOutOfRangeException(nameof(count), "You must generate at least one employee"),
-            _ => count
+            not null => count.Value
         };
 
-        return Raw.People.Get()
+        return [.. new People()
             .OrderBy(i => i.Id)
             .Take(generatedEmployeesCount)
-            .ToEmployees()
-            .ToList();
+            .ToEmployees()];
     }
 }

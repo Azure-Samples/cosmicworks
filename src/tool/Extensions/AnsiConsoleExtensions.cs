@@ -30,7 +30,10 @@ internal static class AnsiConsoleExtensions
         grid.AddColumn();
         grid.AddRow("[green bold]Database[/]", $"[teal]{settings.DatabaseName}[/]");
         grid.AddRow("[green bold]Container[/]", $"[teal]{settings.ContainerName}[/]");
-        grid.AddRow("[green]Count[/]", $"[teal]{settings.Quantity:##,#}[/]");
+        if (settings.Quantity is not null)
+        {
+            grid.AddRow("[green]Count[/]", $"[teal]{settings.Quantity:##,#}[/]");
+        }
 
         console.Write(
             new Panel(grid)

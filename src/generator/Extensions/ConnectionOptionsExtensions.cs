@@ -41,7 +41,8 @@ public static class ConnectionOptionsExtensions
     public static ConnectionOptions FromEndpoint(string endpoint) => new()
     {
         Type = ConnectionType.MicrosoftEntra,
-        Credential = endpoint
+        Credential = endpoint,
+        Emulator = false
     };
 
     /// <summary>
@@ -56,7 +57,8 @@ public static class ConnectionOptionsExtensions
     public static ConnectionOptions FromConnectionString(string connectionString) => new()
     {
         Type = ConnectionType.ResourceOwnerPasswordCredential,
-        Credential = connectionString
+        Credential = connectionString,
+        Emulator = false
     };
 
     /// <summary>
@@ -71,6 +73,7 @@ public static class ConnectionOptionsExtensions
     public static ConnectionOptions FromEmulator() => new()
     {
         Type = ConnectionType.ResourceOwnerPasswordCredential,
-        Credential = emulatorConnectionString
+        Credential = emulatorConnectionString,
+        Emulator = true
     };
 }

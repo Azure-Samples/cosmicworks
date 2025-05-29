@@ -19,7 +19,7 @@ internal sealed class GenerateProductsCommand(
             databaseName: settings.DatabaseName,
             containerName: settings.ContainerName,
             count: settings.Quantity,
-            disableHierarchicalPartitionKeys: settings.DisableHierarchicalPartitionKeys ?? false,
+            disableHierarchicalPartitionKeys: settings.Emulator || (settings.DisableHierarchicalPartitionKeys ?? false),
             onItemCreate: console.WriteItem
         );
 

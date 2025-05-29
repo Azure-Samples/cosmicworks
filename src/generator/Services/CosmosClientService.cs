@@ -7,14 +7,21 @@ public sealed class CosmosClientService : ICosmosClientService
     private CosmosClient? _client;
 
     /// <inheritdoc />
-    public CosmosClient GetCosmosClient(ConnectionOptions options) => _client ??= options
-        .ToCosmosClientBuilder()
-        .WithSerializerOptions(new CosmosSerializationOptions()
-        {
-            IgnoreNullValues = true,
-            PropertyNamingPolicy = CosmosPropertyNamingPolicy.CamelCase,
-        })
-        .WithBulkExecution(true)
-        .WithThrottlingRetryOptions(TimeSpan.FromSeconds(30), 30)
-        .Build();
+    public CosmosClient GetCosmosClient(ConnectionOptions options)
+    {
+        ArgumentNullException.ThrowIfNull(options);
+
+        return _client ??= options.Emulator ?
+            options.ToEmulatorCompatibleCosmosClient()
+            : options
+                .ToCosmosClientBuilder()
+                .WithSerializerOptions(new CosmosSerializationOptions()
+                {
+                    IgnoreNullValues = true,
+                    PropertyNamingPolicy = CosmosPropertyNamingPolicy.CamelCase,
+                })
+                .WithBulkExecution(true)
+                .WithThrottlingRetryOptions(TimeSpan.FromSeconds(30), 30)
+                .Build();
+    }
 }

@@ -16,9 +16,7 @@
     <None Include="..\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Raw\**\*.yaml" Link="data\%(Filename)%(Extension)">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <EmbeddedResource Include="..\raw\**\*.yaml" Link="data\%(Filename)%(Extension)" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\models\Microsoft.Samples.Cosmos.NoSQL.CosmicWorks.Models.csproj" />

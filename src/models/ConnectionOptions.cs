@@ -15,4 +15,9 @@ public record ConnectionOptions
     /// Gets the endpoint to use.
     /// </summary>
     public required ConnectionType Type { get; init; }
+
+    /// <summary>
+    /// Indicates whether the emulator is in use.
+    /// </summary>
+    public required bool Emulator { get; init; }
 }
